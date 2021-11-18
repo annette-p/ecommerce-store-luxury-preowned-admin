@@ -28,7 +28,8 @@ const homeRoutes = require('./routes/home');
 
 async function main() {
 
-    app.use('/', homeRoutes);
+  app.use(express.static( "/public"));
+  app.use('/', homeRoutes);
   
 }
 

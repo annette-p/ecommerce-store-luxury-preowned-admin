@@ -1,0 +1,10 @@
+.admin {
+    font-weight: bold;
+}
+
+.logo {
+    /* background-image: url("images/logo/logo.png"); */
+    height: 60px;
+    border-radius: 50%;
+    background-position: center;
+  }
