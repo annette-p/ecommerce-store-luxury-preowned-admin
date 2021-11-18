@@ -33,9 +33,9 @@
         <div class="row mt-4">
             <div class="col">
                 <div class="card" style="width: 70rem;">
-                    <h5 class="card-subtitle mb-2 text-muted mt-3 dashboard-title">Orders</h5>
+                    <h5 class="card-subtitle mb-2 text-muted mt-3 text-center">Orders</h5>
                     <div class="card-body">
-                        <div class="row dashboard-title">
+                        <div class="row text-center">
                             <div class="col">
                                 <h1>18</h1>
                                 <h6 class="card-subtitle mb-2 text-muted">Pending</h6>
@@ -62,9 +62,9 @@
         <div class="row mt-4">
             <div class="col">
                 <div class="card" style="width: 70rem;">
-                    <h5 class="card-subtitle mb-2 text-muted mt-3 dashboard-title">Consignment</h5>
+                    <h5 class="card-subtitle mb-2 text-muted mt-3 text-center">Consignments</h5>
                     <div class="card-body">
-                        <div class="row dashboard-title">
+                        <div class="row text-center">
                             <div class="col">
                                 <h1>30</h1>
                                 <h6 class="card-subtitle mb-2 text-muted">Pending</h6>
@@ -85,6 +85,16 @@
                         
                     </div> 
                 </div>
+            </div>
+        </div>
+        {{!-- summary dashboard --}}
+        <div class="row mt-4 sum-dashboard">
+            <div class="card" style="width: 50rem;">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item"><span class="fw-bold">15 orders</span> to send for shipment</li>
+                    <li class="list-group-item"><span class="fw-bold">5 payments</span> to refund</li>
+                    <li class="list-group-item"><span class="fw-bold">2 orders</span> to return</li>
+                </ul>
             </div>
         </div>
     {{/block}}
