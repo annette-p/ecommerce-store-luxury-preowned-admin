@@ -29,6 +29,7 @@ const homeRoutes = require('./routes/home');
 async function main() {
 
   app.use(express.static( "/public"));
+  app.use(express.static( "views/images"));
   app.use('/', homeRoutes);
   
 }

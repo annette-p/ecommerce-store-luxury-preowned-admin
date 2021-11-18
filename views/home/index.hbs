@@ -1,6 +1,7 @@
 {{#extends 'base'}}
 
     {{#block "content"}}
+        {{!-- each card dashboard --}}
         <h4 class="mt-3">Dashboard</h4>
         <div class="row mt-3">
             <div class="col">
@@ -28,8 +29,62 @@
                 </div>
             </div>
         </div>
-        <div class="row">
+        {{!-- order dashboard --}}
+        <div class="row mt-4">
             <div class="col">
+                <div class="card" style="width: 70rem;">
+                    <h5 class="card-subtitle mb-2 text-muted mt-3 dashboard-title">Orders</h5>
+                    <div class="card-body">
+                        <div class="row dashboard-title">
+                            <div class="col">
+                                <h1>18</h1>
+                                <h6 class="card-subtitle mb-2 text-muted">Pending</h6>
+                            </div>
+                            <div class="col">
+                                    <h1>5</h1>
+                                    <h6 class="card-subtitle mb-2 text-muted">Processed</h6>  
+                            </div>
+                            <div class="col">
+                                <h1>2</h1>
+                                <h6 class="card-subtitle mb-2 text-muted">Cancelled</h6>
+                            </div>
+                            <div class="col">
+                                <h1>25</h1>
+                                <h6 class="card-subtitle mb-2 text-muted">Total</h6>
+                            </div>
+                        </div>
+                        
+                    </div> 
+                </div>
+            </div>
+        </div>
+        {{!-- Consignment dashboard --}}
+        <div class="row mt-4">
+            <div class="col">
+                <div class="card" style="width: 70rem;">
+                    <h5 class="card-subtitle mb-2 text-muted mt-3 dashboard-title">Consignment</h5>
+                    <div class="card-body">
+                        <div class="row dashboard-title">
+                            <div class="col">
+                                <h1>30</h1>
+                                <h6 class="card-subtitle mb-2 text-muted">Pending</h6>
+                            </div>
+                            <div class="col">
+                                    <h1>10</h1>
+                                    <h6 class="card-subtitle mb-2 text-muted">Processed</h6>  
+                            </div>
+                            <div class="col">
+                                <h1>10</h1>
+                                <h6 class="card-subtitle mb-2 text-muted">Cancelled</h6>
+                            </div>
+                            <div class="col">
+                                <h1>50</h1>
+                                <h6 class="card-subtitle mb-2 text-muted">Total</h6>
+                            </div>
+                        </div>
+                        
+                    </div> 
+                </div>
             </div>
         </div>
     {{/block}}

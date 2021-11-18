@@ -3,8 +3,12 @@
 }
 
 .logo {
-    /* background-image: url("images/logo/logo.png"); */
+    background-image: url("/views/images/logo/lp-gold-circle.jpg");
     height: 60px;
     border-radius: 50%;
     background-position: center;
-  }
+}
+
+.dashboard-title {
+    text-align: center;
+}
