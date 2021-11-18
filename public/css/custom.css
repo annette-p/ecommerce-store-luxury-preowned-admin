@@ -3,8 +3,10 @@
 }
 
 .logo {
-    background-image: url("/views/images/logo/lp-gold-circle.jpg");
+    background-image: url("/images/logo/lp-gold-circle.jpg");
     height: 60px;
+    width: 60px;
+    background-size: cover;
     border-radius: 50%;
     background-position: center;
 }

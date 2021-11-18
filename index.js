@@ -11,6 +11,7 @@ app.set("view engine", "hbs");
 
 // static folder
 app.use(express.static("public"));
+// app.use(express.static( "views/images"));
 
 // setup wax-on
 wax.on(hbs.handlebars);
@@ -25,12 +26,13 @@ app.use(
 
 // import in routes
 const homeRoutes = require('./routes/home');
+const productRoutes = require('./routes/products')
 
 async function main() {
 
   app.use(express.static( "/public"));
-  app.use(express.static( "views/images"));
   app.use('/', homeRoutes);
+  app.use('/products', productRoutes);
   
 }
 

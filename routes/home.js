@@ -7,4 +7,8 @@ router.get('/', (req,res)=>{
     res.render("home/index")
 })
 
+router.get('/about-us', (req,res)=>{
+    res.render("home/new-service")
+})
+
 module.exports = router; 
