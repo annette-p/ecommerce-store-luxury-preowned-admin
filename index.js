@@ -24,7 +24,7 @@ app.use(
   })
 );
 
-// import in routes
+// import in custom routes
 const homeRoutes = require('./routes/home');
 const productRoutes = require('./routes/products')
 

@@ -1,7 +1,30 @@
 {{#extends 'base'}}
 
     {{#block "content"}}
-        this is a new product
+        <div class="row mt-4">
+            <h4>Create New Product Listing</h4>
+        </div>
+        <div class="row mt-4">
+            <div class="col">
+                <div class="card" style="width: 35rem;">
+                    <div class="card-body">
+                        <form method="POST">
+                            {{{productForm}}}
+                            <input type="submit" class="btn btn-primary my-3"/>
+                        </form>
+                        {{!-- <h6 class="card-subtitle mb-2 text-muted">Total Sales</h6> --}}
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card" style="width: 35rem;">
+                    <div class="card-body">
+                        <h6 class="card-subtitle mb-2 text-muted">Total Sales</h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
     {{/block}}
 
 {{/extends}}
