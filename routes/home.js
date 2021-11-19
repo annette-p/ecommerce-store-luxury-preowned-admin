@@ -7,6 +7,10 @@ router.get('/', (req,res)=>{
     res.render("home/index")
 })
 
+router.get('/login', (req,res)=>{
+    res.render("home/login")
+})
+
 router.get('/new-service', (req,res)=>{
     res.render("home/new-service")
 })

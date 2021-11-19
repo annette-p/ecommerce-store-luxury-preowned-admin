@@ -1,6 +1,44 @@
+
+/* Global style */
+.vertical-line {
+    border-right: solid #dddbdb;
+    margin-bottom: 20px;
+}
+
+/* login Page */
+
+/* .bg-img {
+    background-image: url("/images/background/gg-background.jpg");
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: -1;
+} */
+
+
+.login-row {
+    margin-top: 250px;
+}
+
+.login-card {
+    background-color: #f7f7f7;
+}
+
+.login-logo {
+    margin-top: 25px;
+}
+
+.login-body {
+    margin-right: 30px;
+    margin-left: 10px;
+}
+
 .admin {
     font-weight: bold;
 }
+
+/* Navbar */
 
 .logo {
     background-image: url("/images/logo/lp-gold-circle.jpg");
@@ -20,6 +58,8 @@
     margin-right: 950px;
     /* margin-left: -20px; */
 }
+
+/* Dashboard page */
 
 .sum-dashboard {
     padding-left: 200px;
