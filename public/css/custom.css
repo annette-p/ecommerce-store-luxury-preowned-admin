@@ -4,11 +4,21 @@
 
 .logo {
     background-image: url("/images/logo/lp-gold-circle.jpg");
-    height: 60px;
-    width: 60px;
+    height: 70px;
+    width: 70px;
     background-size: cover;
     border-radius: 50%;
     background-position: center;
+}
+
+.text-logo {
+    background-image: url("/images/logo/text-lp-logo.jpg");
+    height: 60px;
+    width: 280px;
+    background-size: cover;
+    background-position: center;
+    margin-right: 950px;
+    /* margin-left: -20px; */
 }
 
 .sum-dashboard {

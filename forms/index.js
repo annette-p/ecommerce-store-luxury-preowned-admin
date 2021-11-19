@@ -31,6 +31,13 @@ const createProductForm = () => {   // to add into argurment - allCateogries, al
     // create a new form
     return forms.create({
         // <input type="text" name="name" class="form-label"/>
+        'designer':fields.string({
+            required: true,
+            errorAfterField: true,
+            cssClasses: {
+                label: ['form-label']
+            }
+        }),
         'name':fields.string({
             required: true,
             errorAfterField: true,
@@ -38,7 +45,7 @@ const createProductForm = () => {   // to add into argurment - allCateogries, al
                 label: ['form-label']
             }
         }),
-        'cost':fields.string({
+        'price':fields.string({
             'required': true,
             'errorAfterField': true,
             'cssClasses': {
@@ -46,14 +53,46 @@ const createProductForm = () => {   // to add into argurment - allCateogries, al
             },
             'validators': [ validators.integer(), validators.min(0)]
         }),
-        'description': fields.string({
+        'retail price':fields.string({
             'required': true,
             'errorAfterField': true,
-            'cssClasses':{
-                'label':['form-label']
+            'cssClasses': {
+                'label': ['form-label']
+            },
+            'validators': [ validators.integer(), validators.min(0)]
+        }),
+        'stock unit':fields.string({
+            'required': true,
+            'errorAfterField': true,
+            'cssClasses': {
+                'label': ['form-label']
+            },
+            'validators': [ validators.integer(), validators.min(0)]
+        }),
+        'insurance':fields.string({   // to be boolean (yes/no)
+            required: true,
+            errorAfterField: true,
+            cssClasses: {
+                label: ['form-label']
             }
         }),
-        // 'category_id': fields.string({
+        'authenticity':fields.string({  // to be boolean (yes/no)
+            required: true,
+            errorAfterField: true,
+            cssClasses: {
+                label: ['form-label']
+            }
+        }),
+        // 'tags': fields.string({ // by default will set to "just in", but able to have multi-select for other tag
+        //     required: true,
+        //     errorAfterField: true,
+        //     cssClasses:{
+        //         'label':['form-label']
+        //     },
+        //     widget: widgets.multipleSelect(),
+        //     choices: allTags
+        // }),
+        // 'category_id': fields.string({  // drop-down list, can only choose 1 choice frm the list
         //     'label':'Product Category',
         //     'required': true,
         //     'errorAfterField': true,
@@ -63,15 +102,51 @@ const createProductForm = () => {   // to add into argurment - allCateogries, al
         //     'widget': widgets.select(),
         //     'choices': allCateogries
         // }),
-        // 'tags': fields.string({
-        //     required: true,
-        //     errorAfterField: true,
-        //     cssClasses:{
+        // 'condition_id': fields.string({  // drop-down list, can only choose 1 choice frm the list
+        //     'label':'Condition',
+        //     'required': true,
+        //     'errorAfterField': true,
+        //     'cssClasses': {
         //         'label':['form-label']
         //     },
-        //     widget: widgets.multipleSelect(),
-        //     choices: allTags
+        //     'widget': widgets.select(),
+        //     'choices': allConditions
         // }),
+        'condition description': fields.string({  
+            'required': true,
+            'errorAfterField': true,
+            'cssClasses':{
+                'label':['form-label']
+            }
+        }),
+        'product description': fields.string({  
+            'required': true,
+            'errorAfterField': true,
+            'cssClasses':{
+                'label':['form-label']
+            }
+        }),
+        'product specification': fields.string({  
+            'required': true,
+            'errorAfterField': true,
+            'cssClasses':{
+                'label':['form-label']
+            }
+        }),
+        'consignment':fields.string({   // to be boolean (yes/no)
+            required: true,
+            errorAfterField: true,
+            cssClasses: {
+                label: ['form-label']
+            }
+        }),
+        'consignment ID':fields.string({   // How to auto-populated frm consignment table
+            required: true,
+            errorAfterField: true,
+            cssClasses: {
+                label: ['form-label']
+            }
+        }),
         // 'image_url': fields.string({
         //     widget: widgets.hidden()
         // })
