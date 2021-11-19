@@ -27,12 +27,14 @@ app.use(
 // import in custom routes
 const homeRoutes = require('./routes/home');
 const productRoutes = require('./routes/products')
+const orderRoutes = require('./routes/orders')
 
 async function main() {
 
   app.use(express.static( "/public"));
   app.use('/', homeRoutes);
   app.use('/products', productRoutes);
+  app.use('/orders', orderRoutes);
   
 }
 

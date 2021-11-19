@@ -1,0 +1,119 @@
+{{#extends 'base'}}
+
+    {{#block "content"}}
+        <div class="row mt-3">
+            <div class="col">
+                <h4>Orders</h4>
+            </div>
+            <div class="col">
+                <div class="container-fluid">
+                    <form class="d-flex mb-3">
+                        <input class="form-control me-2" type="search" placeholder="Search for orders" aria-label="Search">
+                        <button class="btn btn-outline-success" type="submit">Search</button>
+                    </form>
+                </div>
+            </div>
+            <div class="col-1">
+            </div> 
+        </div>
+        {{!-- Summary --}}  
+        <div class="row mt-4 text-center">
+            <div class="col mb-2">
+            </div> 
+            <div class="col mb-2">
+                All <span class="fst-italic">(23)</span>
+            </div>
+            <div class="col mb-2">
+                Processing <span class="fst-italic">(23)</span> 
+            </div>
+            <div class="col mb-2">
+                Shipment <span class="fst-italic">(23)</span>
+            </div>
+            <div class="col mb-2">
+                Completed <span class="fst-italic">(23)</span>
+            </div>
+            <div class="col mb-2">
+                Cancelled <span class="fst-italic">(5)</span>
+            </div>
+            <div class="col mb-2">
+                Refund <span class="fst-italic">(2)</span>
+            </div>
+            <div class="col mb-2">
+            </div> 
+        </div>
+        {{!-- Table --}}
+        {{!-- header --}}
+        <table class="mt-4 table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">Order#</th>
+                    <th scope="col">Customer</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Shipping Address</th>
+                    <th scope="col">Total</th>
+                    <th scope="col">Quantity</th>
+                    <th scope="col">Payment</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            {{!-- content --}}
+            <tbody>
+                <tr>
+                    <th scope="row">1</th>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>
+                        <button type="button" class="btn btn-outline-success">View</button>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">2</th>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>
+                        <button type="button" class="btn btn-outline-success">View</button>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">3</th>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>
+                        <button type="button" class="btn btn-outline-success">View</button>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+        {{!-- Update button --}}
+        <div class="row mt-3">
+            <div class="col-1">
+            </div> 
+            <div class="col">
+                <div class="d-grid gap-2 mt-3">
+                    <button class="btn btn-outline-secondary" type="submit">Update</button>
+                </div>
+            </div>
+            <div class="col-1">
+            </div> 
+        </div>
+   
+    {{/block}}
+
+{{/extends}}
