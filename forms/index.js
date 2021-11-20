@@ -154,4 +154,75 @@ const createProductForm = () => {   // to add into argurment - allCateogries, al
     })
 }
 
-module.exports = { createProductForm, bootstrapField};
+
+const createNewAdminForm = ()=>{
+    return forms.create({
+        'first name': fields.string({
+            'required': true,
+            'errorAfterField': true,
+            'cssClasses': {
+                'label': ['form-label']
+            }
+        }),
+        'last name': fields.string({
+            'required': true,
+            'errorAfterField': true,
+            'cssClasses': {
+                'label': ['form-label']
+            }
+        }),
+        'email': fields.string({
+            'required': true,
+            'errorAfterField': true,
+            'cssClasses': {
+                'label': ['form-label']
+            }
+        }),
+        'username': fields.string({
+            'required': true,
+            'errorAfterField': true,
+            'cssClasses': {
+                'label': ['form-label']
+            }
+        }),
+        'password': fields.string({
+            'required': true,
+            'errorAfterField': true,
+            'cssClasses': {
+                'label': ['form-label']
+            },
+            'widget': widgets.password()
+        }),
+        'confirm_password': fields.string({
+            'required': true,
+            'errorAfterField': true,
+            'cssClasses': {
+                'label':['form-label']
+            },
+            'widget': widgets.password(),
+            'validators': [validators.matchField('password')]
+        })
+    })
+}
+
+const createAdminLoginForm = () => {
+    return forms.create({
+        'username': fields.string({
+            'required': true,
+            'errorAfterField': true,
+            'cssClasses': {
+                'label': ['form-label']
+            }
+        }),
+        'password': fields.string({
+            'required': true,
+            'errorAfterField': true,
+            'cssClasses': {
+                'label': ['form-label']
+            },
+            'widget': widgets.password()
+        })
+    })
+}
+
+module.exports = { createProductForm, bootstrapField, createNewAdminForm, createAdminLoginForm };

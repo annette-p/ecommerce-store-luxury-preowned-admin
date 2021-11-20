@@ -29,21 +29,24 @@
                                     <div class="card-body login-body">
                                         <h5 class="card-title text-center">Admin Login</h5>
                                         <div class="mt-4">
+                                            <form method="POST">
+                                                {{{adminLoginForm}}}
+                                            </form>
+                                        </div>
+                                        {{!-- <div class="mt-4">
                                             <input class="form-control" type="text" placeholder="Username" aria-label="default input example">
                                         </div>
                                         <div class="mt-4">
                                             <input class="form-control" type="text" placeholder="Password" aria-label="default input example">
-                                        </div>
+                                        </div> --}}
                                         <div class="mt-4">
                                             <div class="d-grid gap-2">
                                                 <button class="btn btn-secondary" type="button">LOGIN</button>
                                             </div>
                                         </div>
-
                                         <p class="text-center mt-4">
                                             Reset Password
                                         </p>
-                                        {{!-- <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p> --}}
                                     </div>
                                 </div>
                             </div>
