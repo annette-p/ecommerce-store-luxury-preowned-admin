@@ -10,9 +10,6 @@
                 <li class="nav-item" role="presentation">
                     <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Change Password</button>
                 </li>
-                <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Change Email</button>
-                </li>
             </ul>
             {{!-- content --}}
             <div class="tab-content" id="myTabContent">
@@ -21,8 +18,15 @@
                     <div class="row mt-4">
                         <div class="card mt-4 admin-regis-form" style="width: 50rem;">
                             <div class="card-body">
-                                <h3>Carolen form rendering</h3>  
-                                <h3>first name, last name, email, username</h3>  
+                                {{{adminProfileForm}}}
+                            </div>
+                            {{!-- update button --}}
+                            <div class="row mb-4">
+                                <div class="col ms-3 me-3">
+                                    <div class="d-grid gap-2 mt-3">
+                                        <button class="btn btn-secondary" type="submit">Update Profile</button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -32,31 +36,13 @@
                     <div class="row mt-4">
                         <div class="card mt-4 admin-regis-form" style="width: 50rem;">
                             <div class="card-body">
-                                <h3>Carolen form rendering form field to change new password here</h3>  
+                                {{{changePasswordForm}}}
                             </div>
                             {{!-- submit button --}}
                             <div class="row mb-4">
                                 <div class="col ms-3 me-3">
                                     <div class="d-grid gap-2 mt-3">
-                                        <button class="btn btn-secondary" type="submit">Submit</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                {{!-- Change Email --}}
-                <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
-                    <div class="row mt-4">
-                        <div class="card mt-4 admin-regis-form" style="width: 50rem;">
-                            <div class="card-body">
-                                <h3>Carolen form rendering existing email and form field here</h3>  
-                            </div>
-                            {{!-- submit button --}}
-                            <div class="row mb-4">
-                                <div class="col ms-3 me-3">
-                                    <div class="d-grid gap-2 mt-3">
-                                        <button class="btn btn-secondary" type="submit">Submit</button>
+                                        <button class="btn btn-secondary" type="submit">Change Password</button>
                                     </div>
                                 </div>
                             </div>

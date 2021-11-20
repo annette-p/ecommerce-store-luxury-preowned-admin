@@ -53,7 +53,8 @@ const createProductForm = () => {   // to add into argurment - allCateogries, al
             },
             'validators': [ validators.integer(), validators.min(0)]
         }),
-        'retail price':fields.string({
+        'retailPrice':fields.string({
+            'label': 'Retail Price',
             'required': true,
             'errorAfterField': true,
             'cssClasses': {
@@ -61,7 +62,8 @@ const createProductForm = () => {   // to add into argurment - allCateogries, al
             },
             'validators': [ validators.integer(), validators.min(0)]
         }),
-        'stock unit':fields.string({
+        'stockUnit':fields.string({
+            'label': 'Stock Unit',
             'required': true,
             'errorAfterField': true,
             'cssClasses': {
@@ -112,21 +114,24 @@ const createProductForm = () => {   // to add into argurment - allCateogries, al
         //     'widget': widgets.select(),
         //     'choices': allConditions
         // }),
-        'condition description': fields.string({  
+        'condition_description': fields.string({  
+            'label': 'Condition Description',
             'required': true,
             'errorAfterField': true,
             'cssClasses':{
                 'label':['form-label']
             }
         }),
-        'product description': fields.string({  
+        'product_description': fields.string({  
+            'label': 'Product Description',
             'required': true,
             'errorAfterField': true,
             'cssClasses':{
                 'label':['form-label']
             }
         }),
-        'product specification': fields.string({  
+        'product_specification': fields.string({  
+            'label': 'Product Specification',
             'required': true,
             'errorAfterField': true,
             'cssClasses':{
@@ -140,7 +145,8 @@ const createProductForm = () => {   // to add into argurment - allCateogries, al
                 label: ['form-label']
             }
         }),
-        'consignment ID':fields.string({   // How to auto-populated frm consignment table
+        'consignment_id':fields.string({   // How to auto-populated frm consignment table
+            'label': 'Consignment ID',
             required: true,
             errorAfterField: true,
             cssClasses: {
@@ -148,6 +154,7 @@ const createProductForm = () => {   // to add into argurment - allCateogries, al
             }
         }),
         // 'image_url': fields.string({
+        //    'label': 'Image URL',
         //     widget: widgets.hidden()
         // })
         
@@ -157,14 +164,16 @@ const createProductForm = () => {   // to add into argurment - allCateogries, al
 
 const createNewAdminForm = ()=>{
     return forms.create({
-        'first name': fields.string({
+        'firstname': fields.string({
+            'label': 'First Name',
             'required': true,
             'errorAfterField': true,
             'cssClasses': {
                 'label': ['form-label']
             }
         }),
-        'last name': fields.string({
+        'lastname': fields.string({
+            'label': 'Last Name',
             'required': true,
             'errorAfterField': true,
             'cssClasses': {
@@ -193,7 +202,8 @@ const createNewAdminForm = ()=>{
             },
             'widget': widgets.password()
         }),
-        'confirm_password': fields.string({
+        'confirmPassword': fields.string({
+            'label': 'Confirm Password',
             'required': true,
             'errorAfterField': true,
             'cssClasses': {
@@ -205,6 +215,7 @@ const createNewAdminForm = ()=>{
     })
 }
 
+// login form at the home page
 const createAdminLoginForm = () => {
     return forms.create({
         'username': fields.string({
@@ -225,4 +236,67 @@ const createAdminLoginForm = () => {
     })
 }
 
-module.exports = { createProductForm, bootstrapField, createNewAdminForm, createAdminLoginForm };
+// current logged in admin user in setting page
+const displayAdminProfileForm = ()=>{    // to fatch current email from user profile table in db
+    return forms.create({
+        'firstname': fields.string({
+            'label': 'First Name',
+            'required': true,
+            'errorAfterField': true,
+            'cssClasses': {
+                'label': ['form-label']
+            }
+        }),
+        'lastname': fields.string({
+            'label': 'Last Name',
+            'required': true,
+            'errorAfterField': true,
+            'cssClasses': {
+                'label': ['form-label']
+            }
+        }),
+        'email': fields.string({
+            'required': true,
+            'errorAfterField': true,
+            'cssClasses': {
+                'label': ['form-label']
+            }
+        })
+    })
+}
+
+// current logged in admin user change his/her own password in setting page
+const createChangePasswordForm = () => {
+    return forms.create({
+        'currentPassword': fields.string({
+            'label': 'Current Password',
+            'required': true,
+            'errorAfterField': true,
+            'cssClasses': {
+                'label': ['form-label']
+            },
+            'widget': widgets.password()
+        }),
+        'newPassword': fields.string({
+            'label': 'New Password',
+            'required': true,
+            'errorAfterField': true,
+            'cssClasses': {
+                'label': ['form-label']
+            },
+            'widget': widgets.password()
+        }),
+        'newPassword2': fields.string({
+            'label': 'Re-enter New Password',
+            'required': true,
+            'errorAfterField': true,
+            'cssClasses': {
+                'label': ['form-label']
+            },
+            'widget': widgets.password()
+        })
+    })
+}
+
+
+module.exports = { createProductForm, bootstrapField, createNewAdminForm, createAdminLoginForm, createChangePasswordForm, displayAdminProfileForm };
