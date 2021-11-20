@@ -59,6 +59,13 @@ router.post('/login', (req,res)=>{
     })
 })
 
+// router to process admin logout 
+// router.get('/logout', [checkIfAuthenticated], (req,res)=>{
+//     req.session.user = null;
+//     req.flash('success_messages', "Logged out successfully");
+//     res.redirect('/login');
+// });
+
 router.get('/new-service', (req,res)=>{
     res.render("home/new-service")
 })
