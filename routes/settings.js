@@ -23,7 +23,7 @@ router.get('/',(req,res)=>{
 
     res.render('settings/profile',{
         // 'user': req.session.user
-        // changePasswordForm: changePasswordForm.toHTML(bootstrapField),
+        updateMyProfile: true, // to control the tab selection
         adminProfileForm: adminProfileForm.toHTML(bootstrapField)
     })
 })
@@ -31,8 +31,9 @@ router.get('/',(req,res)=>{
 router.get('/change-password',(req,res)=>{
     const changePasswordForm = createChangePasswordForm();
     
-    res.render('settings/profile',{
+    res.render('settings/change-password',{
         // 'user': req.session.user
+        changePassword: true, // to control the tab selection
         changePasswordForm: changePasswordForm.toHTML(bootstrapField)
     })
 })

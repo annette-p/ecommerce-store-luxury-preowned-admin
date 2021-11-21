@@ -1,71 +1,21 @@
-{{#extends 'base'}}
+{{#extends 'settings'}}
 
-    {{#block "content"}}
+    {{#block "profileContent"}}
         <div class="row mt-4">
-            {{!-- Nav tap --}}
-            <ul class="nav nav-tabs" id="myTab" role="tablist">
-                <li class="nav-item" role="presentation">
-                    <button id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" 
-                        {{#if adminProfileForm}}aria-selected="true"{{/if}} class="nav-link {{#if adminProfileForm}}active{{/if}}" >
-                        <a class="nav-choice" href="/settings">My Profile</a>
-                    </button>
-                </li>
-                <li class="nav-item" role="presentation">
-                    <button id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" 
-                        {{#if changePasswordForm}}aria-selected="true"{{/if}} class="nav-link {{#if changePasswordForm}}active{{/if}}" >
-                        <a class="nav-choice" href="/settings/change-password">Change Password</a>
-                    </button>
-                </li>
-            </ul>
-            {{!-- content --}}
-            <div class="tab-content" id="myTabContent">
-
-                {{#if adminProfileForm}}
-                {{!-- My Profile --}}
-                <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                    <div class="row mt-4">
-                        <div class="card mt-4 admin-regis-form" style="width: 50rem;">
-                            <div class="card-body">
-                                {{{adminProfileForm}}}
-                            </div>
-                            {{!-- update button --}}
-                            <div class="row mb-4">
-                                <div class="col ms-3 me-3">
-                                    <div class="d-grid gap-2 mt-3">
-                                        <button class="btn btn-secondary" type="submit">Update Profile</button>
-                                    </div>
-                                </div>
-                            </div>
+            <div class="card mt-4 admin-regis-form" style="width: 50rem;">
+                <div class="card-body">
+                    {{{adminProfileForm}}}
+                </div>
+                {{!-- update button --}}
+                <div class="row mb-4">
+                    <div class="col ms-3 me-3">
+                        <div class="d-grid gap-2 mt-3">
+                            <button class="btn btn-secondary" type="submit">Update Profile</button>
                         </div>
                     </div>
                 </div>
-                {{/if}}
-
-                {{#if changePasswordForm}}
-                {{!-- Change Password --}}
-                <div class="tab-pane fade show active" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                    {{!-- {{#block "profileContent"}}{{/block}} --}}
-                    <div class="row mt-4">
-                        <div class="card mt-4 admin-regis-form" style="width: 50rem;">
-                            <div class="card-body">
-                                {{{changePasswordForm}}}
-                            </div>
-                            {{!-- submit button --}}
-                            <div class="row mb-4">
-                                <div class="col ms-3 me-3">
-                                    <div class="d-grid gap-2 mt-3">
-                                        <button class="btn btn-secondary" type="submit">Change Password</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                {{/if}}
-
             </div>
         </div>
-        
     {{/block}}
 
 {{/extends}}
