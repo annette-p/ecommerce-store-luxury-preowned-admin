@@ -28,6 +28,16 @@ router.get('/',(req,res)=>{
     })
 })
 
+// router.get('/change-password',(req,res)=>{
+//     const changePasswordForm = createChangePasswordForm();
+    
+//     res.render('settings/profile',{
+//         // 'user': req.session.user
+//         changePasswordForm: changePasswordForm.toHTML(bootstrapField),
+//         changePassword: true
+//     })
+// })
+
 // route to process to update existing user admin details
 router.post('/:user_id/update', async function (req, res) {})
 
