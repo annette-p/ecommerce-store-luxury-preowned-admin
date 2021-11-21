@@ -7,13 +7,13 @@
                 <li class="nav-item" role="presentation">
                     <button id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" 
                         {{#if adminProfileForm}}aria-selected="true"{{/if}} class="nav-link {{#if adminProfileForm}}active{{/if}}" >
-                        <a href="/settings">My Profile</a>
+                        <a class="nav-choice" href="/settings">My Profile</a>
                     </button>
                 </li>
                 <li class="nav-item" role="presentation">
                     <button id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" 
                         {{#if changePasswordForm}}aria-selected="true"{{/if}} class="nav-link {{#if changePasswordForm}}active{{/if}}" >
-                        <a href="/settings/change-password">Change Password</a>
+                        <a class="nav-choice" href="/settings/change-password">Change Password</a>
                     </button>
                 </li>
             </ul>

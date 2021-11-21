@@ -14,6 +14,18 @@
     /* font-weight: bold; */
 }
 
+a {
+    text-decoration: none !important;
+}
+
+.nav-choice:hover {
+    color: rgb(70, 69, 69);
+}
+
+.nav-choice:active {
+    color: rgb(70, 69, 69);
+}
+
 /* login Page */
 
 /* .bg-img {
