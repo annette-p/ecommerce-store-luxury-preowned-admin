@@ -3,26 +3,26 @@
     {{#block "content"}}
         {{!-- each card dashboard --}}
         <h4 class="mt-3">Dashboard</h4>
-        <div class="row mt-3">
+        <div class="row mt-4">
             <div class="col">
-                <div class="card" style="width: 18rem;">
-                    <div class="card-body">
+                <div class="card total-card-bg" style="width: 18rem;">
+                    <div class="card-body text-center">
                         <h6 class="card-subtitle mb-2 text-muted">Total Sales</h6>
                         <h1>$890.00</h1>
                     </div>
                 </div>
             </div>
             <div class="col">
-                <div class="card" style="width: 18rem;">
-                    <div class="card-body">
+                <div class="card total-card-bg" style="width: 18rem;">
+                    <div class="card-body text-center">
                         <h6 class="card-subtitle mb-2 text-muted">Total Orders</h6>
                         <h1>25</h1>
                     </div>
                 </div>
             </div>
             <div class="col">
-                <div class="card" style="width: 18rem;">
-                    <div class="card-body">
+                <div class="card total-card-bg" style="width: 18rem;">
+                    <div class="card-body text-center">
                         <h6 class="card-subtitle mb-2 text-muted">Total Consignments</h6>
                         <h1>50</h1>
                     </div>
@@ -32,7 +32,7 @@
         {{!-- order dashboard --}}
         <div class="row mt-4">
             <div class="col">
-                <div class="card" style="width: 70rem;">
+                <div class="card card-bg" style="width: 70rem;">
                     <h5 class="card-subtitle mb-2 text-muted mt-3 text-center">Orders</h5>
                     <div class="card-body">
                         <div class="row text-center">
@@ -61,7 +61,7 @@
         {{!-- Consignment dashboard --}}
         <div class="row mt-4">
             <div class="col">
-                <div class="card" style="width: 70rem;">
+                <div class="card card-bg" style="width: 70rem;">
                     <h5 class="card-subtitle mb-2 text-muted mt-3 text-center">Consignments</h5>
                     <div class="card-body">
                         <div class="row text-center">
@@ -89,11 +89,11 @@
         </div>
         {{!-- summary dashboard --}}
         <div class="row mt-4 sum-dashboard">
-            <div class="card" style="width: 50rem;">
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item"><span class="fw-bold">15 orders</span> to send for shipment</li>
-                    <li class="list-group-item"><span class="fw-bold">5 payments</span> to refund</li>
-                    <li class="list-group-item"><span class="fw-bold">2 orders</span> to return</li>
+            <div class="card sum-card-bg" style="width: 50rem;">
+                <ul class="list-group list-group-flush mt-2 mb-2">
+                    <li class="list-group-item"><span class="fw-bold">15 orders</span> pending shipment</li>
+                    <li class="list-group-item"><span class="fw-bold">5 payments</span> pending refund</li>
+                    <li class="list-group-item"><span class="fw-bold">2 orders</span> pending return</li>
                 </ul>
             </div>
         </div>

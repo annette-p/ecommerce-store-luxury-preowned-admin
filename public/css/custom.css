@@ -5,6 +5,15 @@
     margin-bottom: 20px;
 }
 
+.white-font {
+    color: whitesmoke;
+}
+
+.white-font:hover {
+    color: whitesmoke;
+    /* font-weight: bold; */
+}
+
 /* login Page */
 
 /* .bg-img {
@@ -59,10 +68,36 @@
     /* margin-left: -20px; */
 }
 
+/* side Navbar */
+
+.col-bg {
+    background-color: rgb(52, 52, 63);
+    /* background-color: rgb(77, 75, 75); */
+    /* background-color: rgb(37, 37, 46); */
+}
+
+.col-hover:hover {
+    background-color: rgb(75, 73, 73);
+}
+
+
 /* Dashboard page */
 
 .sum-dashboard {
     padding-left: 200px;
+}
+
+.total-card-bg {
+    /* background-color: rgb(245, 236, 224); */
+    background-color: rgb(240, 240, 226);
+}
+
+.card-bg {
+    background-color: rgb(241, 239, 239);
+}
+
+.sum-card-bg {
+    background-color: rgb(240, 243, 247);
 }
 
 /* Users page  */
