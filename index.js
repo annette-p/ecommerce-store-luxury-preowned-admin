@@ -29,6 +29,7 @@ const homeRoutes = require('./routes/home');
 const productRoutes = require('./routes/products')
 const orderRoutes = require('./routes/orders')
 const cartRoutes = require('./routes/carts')
+const consignmentRoutes = require('./routes/consignments')
 const userRoutes = require('./routes/users')
 const settingRoutes = require('./routes/settings')
 
@@ -39,6 +40,7 @@ async function main() {
   app.use('/products', productRoutes);
   app.use('/orders', orderRoutes);
   app.use('/carts', cartRoutes);
+  app.use('/consignments', consignmentRoutes);
   app.use('/users', userRoutes);
   app.use('/settings', settingRoutes);
   
