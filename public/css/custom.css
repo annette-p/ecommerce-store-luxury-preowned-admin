@@ -1,5 +1,6 @@
 
 /* Global style */
+
 .vertical-line {
     border-right: solid #dddbdb;
     margin-bottom: 20px;
@@ -28,18 +29,22 @@ a {
 
 /* login Page */
 
-/* .bg-img {
+#body {
+    height: 100vh;
+}
+
+.bg-img {
     background-image: url("/images/background/gg-background.jpg");
     height: 100%;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     z-index: -1;
-} */
+}
 
 
 .login-row {
-    margin-top: 250px;
+    padding-top: 250px;
 }
 
 .login-card {

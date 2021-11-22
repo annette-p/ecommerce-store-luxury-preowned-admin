@@ -11,8 +11,13 @@ const getHashedPassword = (password) => {
     return hash;
 }
 
+// main route - rediect to profile
+router.get('/', (req, res) => {
+    res.redirect('/settings/profile')
+})
+
 // router.get('/settings', [checkIfAuthenticated], (req,res)=>{})  --> to use htis instead
-router.get('/',(req,res)=>{
+router.get('/profile',(req,res)=>{
     // const changePasswordForm = createChangePasswordForm();
     const adminProfileForm = displayAdminProfileForm();
 
