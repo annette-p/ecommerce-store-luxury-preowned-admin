@@ -1,0 +1,112 @@
+{{#extends 'base'}}
+
+    {{#block "content"}}
+        <div class="row mt-4">
+            <div class="row search-div">
+                <div class="col-1">
+                </div>
+                {{!-- add product button --}}
+                <div class="col-3">
+                    <a class="btn btn-outline-secondary" href="/products/add">+ Add New</a>
+                </div>
+                {{!-- search input --}}
+                <div class="col-4">
+                    <div class="container-fluid">
+                        <form class="d-flex mb-3">
+                            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                            <button class="btn btn-outline-success" type="submit">Search</button>
+                        </form>
+                    </div>
+                </div>
+                {{!-- filter --}}
+                <div class="col-4">
+                    <form class="d-flex mb-3">
+                        <select id="product-filter" name="product-filter" class="me-2">
+                            <option value=""> ------------------- </option>
+                            <option value="product-name">Product Name</option>
+                            <option value="product-category">Product Category</option>
+                            <option value="date">Date</option>
+                            <option value="stock-status">Stock status</option>
+                        </select>
+                        <button class="btn btn-outline-success" type="submit">Filter</button>
+                    </form>
+                </div> 
+            </div>
+            {{!-- Nav tap --}}
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Product</button>
+                </li>
+            </ul>
+            {{!-- content --}}
+            <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                    {{!-- table --}}
+                    <table class="mt-4 table table-hover">
+                        <thead>
+                            <tr>
+                                <th scope="col">ID#</th>
+                                <th scope="col">Image</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Stock</th>
+                                <th scope="col">Price</th>
+                                <th scope="col">Designer</th>
+                                <th scope="col">Category</th>
+                                <th scope="col">Date</th>
+                                <th scope="col">Action</th>
+                            </tr>
+                        </thead>
+                        {{!-- content --}}
+                        <tbody>
+                            <tr>
+                                <th scope="row">1</th>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>
+                                    <button type="button" class="btn btn-outline-secondary">Edit</button>
+                                    <button type="button" class="btn btn-outline-danger">Delete</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row">2</th>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>
+                                    <button type="button" class="btn btn-outline-secondary">Edit</button>
+                                    <button type="button" class="btn btn-outline-danger">Delete</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row">3</th>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>
+                                    <button type="button" class="btn btn-outline-secondary">Edit</button>
+                                    <button type="button" class="btn btn-outline-danger">Delete</button>
+                                </td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        
+    {{/block}}
+
+{{/extends}}

@@ -10,7 +10,9 @@ const {
 } = require('../forms');
 
 router.get('/', (req, res) => {
-    res.render('products/listing', {})
+    res.render('products/listing', {
+        productListing: true
+    })
 })
 
 
@@ -24,6 +26,7 @@ router.get('/add', (req, res) => {   // to remove -- replace with router.get('/a
     const allTags = [ '1', '2']
     const productForm = createProductForm();   // to add in parameter - allCategories, allTags
     res.render('products/add', {
+        addNewProductListing: true,
         'productForm': productForm.toHTML(bootstrapField)
         // 'productForm': productForm.toHTML(bootstrapField),
         // 'cloudinaryName': process.env.CLOUDINARY_NAME,
