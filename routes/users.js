@@ -11,25 +11,37 @@ const getHashedPassword = (password) => {
     return hash;
 }
 
-
-// route to display all users (admin, customer) and route to add new "admin" user 
+// main route - rediect to admin listing
 router.get('/', (req, res) => {
-    const adminSignUpForm = createNewAdminForm();
-    res.render('users/listing', {
-        adminSignUpForm: adminSignUpForm.toHTML(bootstrapField)
+    res.redirect('/users/admins')
+})
+
+// route to display all admin users
+router.get('/admins', (req, res) => {
+    res.render('users/admins', {
+        adminListing: true
     })
 })
 
-// route to add new "admin" user  -->> dont need anymore
-// router.get('/register', (req,res)=>{
-//     const adminSignUpForm = createNewAdminForm();
-//     res.render('users/listing',{
-//         adminSignUpForm: adminSignUpForm.toHTML(bootstrapField)
-//     })
-// });
+// route to display all customer users
+router.get('/customers', (req, res) => {
+    res.render('users/customers', {
+        customerListing: true
+    })
+})
+
+
+// route to register new "admin" user 
+router.get('/admins/register', (req,res)=>{
+    const adminSignUpForm = createNewAdminForm();
+    res.render('users/register',{
+        addNewAdminAccount: true,
+        adminSignUpForm: adminSignUpForm.toHTML(bootstrapField)
+    })
+});
 
 // route to process registering new "admin" user 
-router.post('/register', (req,res)=>{
+router.post('/admins/register', (req,res)=>{
     const adminSignUpForm = createNewAdminForm();
     adminSignUpForm.handle(req,{
         'error': (form) => {

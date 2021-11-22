@@ -1,0 +1,33 @@
+{{#extends 'users'}}
+
+    {{#block "userContent"}}
+        <div class="row mt-1">
+
+            {{!-- add new admin --}}
+            <div class="row mt-4">
+                <h5>Register New Admin Account</h5>
+            </div>
+            <div class="row">
+                <div class="card mt-4 admin-regis-form" style="width: 50rem;">
+                    {{!-- register form --}}
+                    <div class="card-body">
+                        <form method="POST">
+                            {{{adminSignUpForm}}}
+                        </form>
+                    </div>
+                    {{!-- Register button --}}
+                    <div class="row mb-4">
+                        <div class="col ms-3 me-3">
+                            <div class="d-grid gap-2 mt-3">
+                                <button class="btn btn-secondary" type="submit">Register Now</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        
+    {{/block}}
+
+{{/extends}}

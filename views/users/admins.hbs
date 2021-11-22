@@ -1,0 +1,79 @@
+{{#extends 'users'}}
+
+    {{#block "userContent"}}
+        <div class="row">
+            {{!-- Admins Table --}}
+            <table class="mt-4 table table-hover">
+                {{!-- header --}}
+                <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Type</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Username</th>
+                        <th scope="col">First name</th>
+                        <th scope="col">Last name</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                {{!-- content --}}
+                <tbody>
+                    <tr>
+                        <th scope="row">1</th>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>
+                            <button type="button" class="btn btn-outline-secondary">Edit</button>
+                            <button type="button" class="btn btn-outline-danger">Delete</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">2</th>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>
+                            <button type="button" class="btn btn-outline-secondary">Edit</button>
+                            <button type="button" class="btn btn-outline-danger">Delete</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">3</th>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>
+                            <button type="button" class="btn btn-outline-secondary">Edit</button>
+                            <button type="button" class="btn btn-outline-danger">Delete</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            {{!-- Update button --}}
+            <div class="row mt-3">
+                <div class="col-1">
+                </div> 
+                <div class="col">
+                    <div class="d-grid gap-2 mt-3">
+                        <button class="btn btn-outline-secondary" type="submit">Update</button>
+                    </div>
+                </div>
+                <div class="col-1">
+                </div> 
+            </div>
+        </div>
+        
+    {{/block}}
+
+{{/extends}}
