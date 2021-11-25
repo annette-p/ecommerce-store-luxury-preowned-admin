@@ -73,8 +73,10 @@ router.post('/login', (req,res)=>{
 
 // router to process admin logout 
 router.get('/logout', (req,res)=>{
-    req.session.user = null;
-    req.flash('success_messages', "Logged out successfully");
+    if (req.session.user) {
+        req.session.user = null;
+        req.flash('success_messages', "Logged out successfully");
+    }
     res.redirect('/login');
 });
 
