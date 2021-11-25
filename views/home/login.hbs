@@ -27,6 +27,13 @@
                                 <div class="col-md-7">
                                     <div class="card-body login-body">
                                         <h5 class="card-title text-center">Admin Login</h5>
+                                        {{#if success_messages }}
+                                            {{#each success_messages}}
+                                                <div class="alert alert-success">
+                                                    {{this}}
+                                                </div>
+                                            {{/each}}
+                                        {{/if}}
                                         {{#if error_messages}}
                                             {{#each error_messages}}
                                                 <div class="alert alert-danger">

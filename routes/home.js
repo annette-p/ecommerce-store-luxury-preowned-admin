@@ -48,12 +48,19 @@ router.post('/login', (req,res)=>{
                 // login successful
                 await axios.get(`${apiUrl}/users/info`, { headers: headers})
                 .then( (userInfoResult) => {
-                    const userInfo = userInfoResult.data
-                    req.session.user = {   
-                        "info": userInfo,
-                        "token": tokens.refreshToken
+                    const userInfo = userInfoResult.data.data
+
+                    if (userInfo.type === "Admin") {
+                        req.session.user = {   
+                            "info": userInfo,
+                            "token": tokens.refreshToken
+                        }
+                        res.redirect('/')
+                    } else {
+                        req.flash('error_messages', 'Unauthorized')
+                        res.redirect('/login')
                     }
-                    res.redirect('/')
+                    
                 })
                 
             }).catch( (_err) => {
@@ -65,11 +72,11 @@ router.post('/login', (req,res)=>{
 })
 
 // router to process admin logout 
-// router.get('/logout', [checkIfAuthenticated], (req,res)=>{
-//     req.session.user = null;
-//     req.flash('success_messages', "Logged out successfully");
-//     res.redirect('/login');
-// });
+router.get('/logout', (req,res)=>{
+    req.session.user = null;
+    req.flash('success_messages', "Logged out successfully");
+    res.redirect('/login');
+});
 
 router.get('/new-service', (req,res)=>{
     res.render("home/new-service")
