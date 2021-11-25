@@ -8,8 +8,8 @@
                 <thead>
                     <tr>
                         <th scope="col">ID</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Type</th>
+                        {{!-- <th scope="col">Name</th> --}}
+                        {{!-- <th scope="col">Type</th> --}}
                         <th scope="col">Email</th>
                         <th scope="col">Username</th>
                         <th scope="col">First name</th>
@@ -19,20 +19,22 @@
                 </thead>
                 {{!-- content --}}
                 <tbody>
+                    {{#each admins}}
                     <tr>
                         <th scope="row">1</th>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                        {{!-- <td></td> --}}
+                        {{!-- <td></td> --}}
+                        <td>{{this.email}}</td>
+                        <td>{{this.username}}</td>
+                        <td>{{this.firstname}}</td>
+                        <td>{{this.lastname}}</td>
                         <td>
                             <button type="button" class="btn btn-outline-secondary">Edit</button>
                             <button type="button" class="btn btn-outline-danger">Delete</button>
                         </td>
                     </tr>
-                    <tr>
+                    {{/each}}
+                    {{!-- <tr>
                         <th scope="row">2</th>
                         <td></td>
                         <td></td>
@@ -57,7 +59,7 @@
                             <button type="button" class="btn btn-outline-secondary">Edit</button>
                             <button type="button" class="btn btn-outline-danger">Delete</button>
                         </td>
-                    </tr>
+                    </tr> --}}
                 </tbody>
             </table>
             {{!-- Update button --}}

@@ -1,5 +1,7 @@
 const express = require('express');
 const router = express.Router();
+const axios = require("axios");
+
 const { createNewAdminForm, bootstrapField } = require('../forms');
 const crypto = require('crypto');
 // const { checkIfAuthenticated} = require('../middlewares');
@@ -17,16 +19,24 @@ router.get('/', (req, res) => {
 })
 
 // route to display all admin users
-router.get('/admins', (req, res) => {
-    res.render('users/admins', {
-        adminListing: true
+router.get('/admins', async (req, res) => {
+    await axios.get(`${apiUrl}/users/admins`)
+    .then( admins => {
+        res.render('users/admins', {
+            adminListing: true,
+            admins: admins.data.data
+        })  
     })
 })
 
 // route to display all customer users
-router.get('/customers', (req, res) => {
-    res.render('users/customers', {
-        customerListing: true
+router.get('/customers', async (req, res) => {
+    await axios.get(`${apiUrl}/users/admins`)
+    .then( customers => {
+        res.render('users/customers', {
+            customerListing: true,
+            customers: customers.data.data
+        })  
     })
 })
 

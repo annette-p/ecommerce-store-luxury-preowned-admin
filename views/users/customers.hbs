@@ -8,8 +8,8 @@
                 <thead>
                     <tr>
                         <th scope="col">ID</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Type</th>
+                        {{!-- <th scope="col">Name</th>
+                        <th scope="col">Type</th> --}}
                         <th scope="col">Email</th>
                         <th scope="col">Federated Login</th>
                         <th scope="col">Username</th>
@@ -22,22 +22,24 @@
                 </thead>
                 {{!-- content --}}
                 <tbody>
+                    {{#each customers}}
                     <tr>
-                        <th scope="row">1</th>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td>True</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                        <th scope="row">{{this.id}}</th>
+                        {{!-- <td></td>
+                        <td></td> --}}
+                        <td>{{this.email}}</td>
+                        <td>{{this.federated_login}}</td>
+                        <td>{{this.username}}</td>
+                        <td>{{this.firstname}}</td>
+                        <td>{{this.lastname}}</td>
+                        <td>{{this.billing_address}}</td>
+                        <td>{{this.shipping_address}}</td>
                         <td>
                             <button type="button" class="btn btn-outline-secondary">Edit</button>
                         </td>
                     </tr>
-                    <tr>
+                    {{/each}}
+                    {{!-- <tr>
                         <th scope="row">2</th>
                         <td></td>
                         <td></td>
@@ -66,7 +68,7 @@
                         <td>
                             <button type="button" class="btn btn-outline-secondary">Edit</button>
                         </td>
-                    </tr>
+                    </tr> --}}
                 </tbody>
             </table>
             {{!-- Update button --}}

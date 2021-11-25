@@ -12,6 +12,9 @@ const csrf = require('csurf');
 // read from .env file
 require("dotenv").config();
 
+// global variables
+global.apiUrl = process.env.BACKEND_API_ENDPOINT
+
 const { checkIfAuthenticatedAdmin } = require("./middlewares/authentication");
 
 // create an instance of express app

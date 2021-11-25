@@ -4,10 +4,6 @@ const router = express.Router();
 const axios = require("axios");
 
 const { createAdminLoginForm, bootstrapField } = require('../forms');
-const crypto = require('crypto');
-// const { checkIfAuthenticated} = require('../middlewares');
-
-const apiUrl = process.env.BACKEND_API_ENDPOINT
 
 // A router object can contain routes - Add a new route to the Express router
 router.get('/', (req,res)=>{
