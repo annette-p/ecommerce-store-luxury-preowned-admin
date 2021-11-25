@@ -98,6 +98,21 @@
     "function-bind" "^1.1.1"
     "get-intrinsic" "^1.0.2"
 
+"cloudinary-core@^2.10.2":
+  "integrity" "sha512-EXvnWuq3Ah6pZHB2vEfkrJ4tCGlccZo3xsmt1f+bmrB53jU42ZrnX+v8xKRMot9c/STSO7GPbxbhJQ/z/xRazg=="
+  "resolved" "https://registry.npmjs.org/cloudinary-core/-/cloudinary-core-2.12.0.tgz"
+  "version" "2.12.0"
+
+"cloudinary@^1.27.1":
+  "integrity" "sha512-NrSVdzD2yJUMwL4UTfOjlq+bkc88SaNoZjhibLnpI40c46vfIlz2Y77R9HfgYIQ1Lx/k+U1WKZuiQ5Z2Wd2Dsg=="
+  "resolved" "https://registry.npmjs.org/cloudinary/-/cloudinary-1.27.1.tgz"
+  "version" "1.27.1"
+  dependencies:
+    "cloudinary-core" "^2.10.2"
+    "core-js" "3.6.5"
+    "lodash" "^4.17.11"
+    "q" "^1.5.1"
+
 "connect-flash@^0.1.1":
   "integrity" "sha1-2GMPJtlaf4UfmVax6MxnMvO2qjA="
   "resolved" "https://registry.npmjs.org/connect-flash/-/connect-flash-0.1.1.tgz"
@@ -129,6 +144,11 @@
   "integrity" "sha512-ZwrFkGJxUR3EIoXtO+yVE69Eb7KlixbaeAWfBQB9vVsNn/o+Yw69gBWSSDK825hQNdN+wF8zELf3dFNl/kxkUA=="
   "resolved" "https://registry.npmjs.org/cookie/-/cookie-0.4.1.tgz"
   "version" "0.4.1"
+
+"core-js@3.6.5":
+  "integrity" "sha512-vZVEEwZoIsI+vPEuoF9Iqf5H7/M3eeQqWlQnYa8FSKKePuYTf5MWnxb5SDAzCa60b3JBRS5g9b+Dq7b1y/RCrA=="
+  "resolved" "https://registry.npmjs.org/core-js/-/core-js-3.6.5.tgz"
+  "version" "3.6.5"
 
 "cors@^2.8.5":
   "integrity" "sha512-KIHbLJqu73RGr/hnbrO9uBeixNGuvSQjul/jdFvS/KFSIH1hWVd1ng7zOHx+YrEfInLG7q4n6GHQ9cDtxv/P6g=="
@@ -591,7 +611,7 @@
   dependencies:
     "asn1.js" "^5.4.1"
 
-"lodash@^4.17.14":
+"lodash@^4.17.11", "lodash@^4.17.14", "lodash@>=4.0":
   "integrity" "sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg=="
   "resolved" "https://registry.npmjs.org/lodash/-/lodash-4.17.21.tgz"
   "version" "4.17.21"
@@ -712,6 +732,11 @@
   dependencies:
     "forwarded" "0.2.0"
     "ipaddr.js" "1.9.1"
+
+"q@^1.5.1":
+  "integrity" "sha1-fjL3W0E4EpHQRhHxvxQQmsAGUdc="
+  "resolved" "https://registry.npmjs.org/q/-/q-1.5.1.tgz"
+  "version" "1.5.1"
 
 "qs@^6.9.4":
   "integrity" "sha512-M528Hph6wsSVOBiYUnGf+K/7w0hNshs/duGsNXPUCLH5XAqjEtiPGwNONLV0tBH8NoGb0mvD5JubnUTrujKDTg=="

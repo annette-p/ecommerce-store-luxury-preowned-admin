@@ -19,6 +19,7 @@
   "homepage": "https://github.com/annette-p/ecommerce-store-luxury-preowned-admin#readme",
   "dependencies": {
     "axios": "^0.24.0",
+    "cloudinary": "^1.27.1",
     "connect-flash": "^0.1.1",
     "cors": "^2.8.5",
     "csurf": "^1.11.0",
