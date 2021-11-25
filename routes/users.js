@@ -59,14 +59,51 @@ router.post('/admins/register', (req,res)=>{
             })
         },
         'success': async(form) => {
-            let user = new User({
-                'username': form.data.username,
-                'password': getHashedPassword(form.data.password),
-                'email': form.data.email
-            });
-            await user.save();
-            req.flash('success_messages', "New admin has been signed up successfully");
-            res.redirect('/users/login');
+
+            let headerRefreshToken = {
+                'Content-Type': 'application/json'
+            }
+            let accessTokenResult = await axios.post(`${apiUrl}/users/refresh`, {
+                "refresh_token": req.session.user.token
+            }, {
+                headers: headerRefreshToken
+            })
+            if (!accessTokenResult) {
+                req.flash('error_messages', 'Login session expired')
+                res.redirect('/login')
+            }
+
+            let newAdminInfo = {
+                "type": "Admin",
+                "firstname": form.data.firstname,
+                "lastname": form.data.lastname,
+                "email": form.data.email,
+                "username": form.data.username,
+                "password": form.data.password,
+            }
+
+            let headerAuthToken = {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${accessTokenResult.data.accessToken}`
+            }
+
+            let newAdminResult = await axios.post(`${apiUrl}/users/create`, newAdminInfo, {
+                headers: headerAuthToken
+            })
+
+            if (newAdminResult) {
+                req.flash('success_messages', "New admin has been signed up successfully");
+                res.redirect('/users/admins');
+            }
+
+            // let user = new User({
+            //     'username': form.data.username,
+            //     'password': getHashedPassword(form.data.password),
+            //     'email': form.data.email
+            // });
+            // await user.save();
+            // req.flash('success_messages', "New admin has been signed up successfully");
+            // res.redirect('/users/login');
         }
     })
 })

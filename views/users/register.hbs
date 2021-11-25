@@ -12,16 +12,17 @@
                     {{!-- register form --}}
                     <div class="card-body">
                         <form method="POST">
+                            <input type="hidden" name="_csrf" value="{{csrfToken}}"/>
                             {{{adminSignUpForm}}}
-                        </form>
-                    </div>
-                    {{!-- Register button --}}
-                    <div class="row mb-4">
-                        <div class="col ms-3 me-3">
-                            <div class="d-grid gap-2 mt-3">
-                                <button class="btn btn-secondary" type="submit">Register Now</button>
+                            {{!-- Register button --}}
+                            <div class="row mb-4">
+                                <div class="col ms-3 me-3">
+                                    <div class="d-grid gap-2 mt-3">
+                                        <input class="btn btn-secondary" type="submit" value="Register Now" />
+                                    </div>
+                                </div>
                             </div>
-                        </div>
+                        </form>
                     </div>
                 </div>
             </div>
