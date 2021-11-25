@@ -4,7 +4,8 @@
   "description": "![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon --ignore sessions"
   },
   "repository": {
     "type": "git",
@@ -17,6 +18,7 @@
   },
   "homepage": "https://github.com/annette-p/ecommerce-store-luxury-preowned-admin#readme",
   "dependencies": {
+    "axios": "^0.24.0",
     "connect-flash": "^0.1.1",
     "cors": "^2.8.5",
     "csurf": "^1.11.0",

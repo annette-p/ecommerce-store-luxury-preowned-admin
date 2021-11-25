@@ -30,7 +30,6 @@ router.get('/customers', (req, res) => {
     })
 })
 
-
 // route to register new "admin" user 
 router.get('/admins/register', (req,res)=>{
     const adminSignUpForm = createNewAdminForm();

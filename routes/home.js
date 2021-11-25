@@ -1,9 +1,13 @@
 const express = require("express");
 // create a new router object, Router() will return a new router object
-const router = express.Router(); 
+const router = express.Router();
+const axios = require("axios");
+
 const { createAdminLoginForm, bootstrapField } = require('../forms');
 const crypto = require('crypto');
 // const { checkIfAuthenticated} = require('../middlewares');
+
+const apiUrl = process.env.BACKEND_API_ENDPOINT
 
 // A router object can contain routes - Add a new route to the Express router
 router.get('/', (req,res)=>{
@@ -28,33 +32,34 @@ router.post('/login', (req,res)=>{
             })
         },
         'success': async(form) => {
-            // retrieve user by the given email in the form
-            let user = await User.where({
-                'email': form.data.email
-            }).fetch({
-                'require': false
-            })
-
-            // if that user exists, then we check the password matches
-            if (user) {
-                if (user.get('password') == getHashedPassword(form.data.password)) {
-                    // login
-                    req.session.user = {
-                        'id': user.get('id'),
-                        'email': user.get('email'),
-                        'username': user.get('username')
-                    }
-                    req.flash('success_messages', "Welcome back " + user.get('username'));
-                    res.redirect('/users/profile');
-
-                } else {
-                    req.flash('error_messages', 'Login failed')
-                    res.redirect('/users/login')
-                }
-            } else {
-                req.flash('error_messages', 'Login failed')
-                res.redirect('/users/login');
+            let loginInfo = {
+                username: form.data.username,
+                password: form.data.password
             }
+
+            await axios.post(`${apiUrl}/users/authenticate`, loginInfo)
+            .then( async (authResult) => {
+
+                const tokens = authResult.data
+
+                const headers = {
+                    "Authorization": `Bearer ${tokens.accessToken}`
+                };
+                // login successful
+                await axios.get(`${apiUrl}/users/info`, { headers: headers})
+                .then( (userInfoResult) => {
+                    const userInfo = userInfoResult.data
+                    req.session.user = {   
+                        "info": userInfo,
+                        "token": tokens.refreshToken
+                    }
+                    res.redirect('/')
+                })
+                
+            }).catch( (_err) => {
+                req.flash('error_messages', 'Login failed')
+                res.redirect('/login')
+            })
         }
     })
 })
