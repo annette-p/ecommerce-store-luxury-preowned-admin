@@ -4,15 +4,22 @@
         <div class="row mt-4">
             <div class="card mt-4 admin-regis-form" style="width: 50rem;">
                 <div class="card-body">
-                    {{{adminProfileForm}}}
-                </div>
-                {{!-- update button --}}
-                <div class="row mb-4">
-                    <div class="col ms-3 me-3">
-                        <div class="d-grid gap-2 mt-3">
-                            <button class="btn btn-secondary" type="submit">Update Profile</button>
+                    <form method="POST">
+                        <input type="hidden" name="_csrf" value="{{csrfToken}}"/>
+
+                        {{{adminProfileForm}}}
+
+                        <div><i>Note: there is a need to re-login after your email address is updated.</i></div>
+
+                        {{!-- update button --}}
+                        <div class="row mb-4">
+                            <div class="col ms-3 me-3">
+                                <div class="d-grid gap-2 mt-3">
+                                    <input class="btn btn-secondary" type="submit" value="Update Profile"/>
+                                </div>
+                            </div>
                         </div>
-                    </div>
+                    </form>
                 </div>
             </div>
         </div>

@@ -2,16 +2,11 @@ const express = require('express');
 const router = express.Router();
 const axios = require("axios");
 
-const { createNewAdminForm, bootstrapField } = require('../forms');
-const crypto = require('crypto');
-// const { checkIfAuthenticated} = require('../middlewares');
-
-
-const getHashedPassword = (password) => {
-    const sha256 = crypto.createHash('sha256');
-    const hash = sha256.update(password).digest('base64');
-    return hash;
-}
+const { 
+    bootstrapField,
+    createNewAdminForm,
+    displayAdminProfileForm 
+} = require('../forms');
 
 // main route - rediect to admin listing
 router.get('/', (req, res) => {
@@ -95,15 +90,6 @@ router.post('/admins/register', (req,res)=>{
                 req.flash('success_messages', "New admin has been signed up successfully");
                 res.redirect('/users/admins');
             }
-
-            // let user = new User({
-            //     'username': form.data.username,
-            //     'password': getHashedPassword(form.data.password),
-            //     'email': form.data.email
-            // });
-            // await user.save();
-            // req.flash('success_messages', "New admin has been signed up successfully");
-            // res.redirect('/users/login');
         }
     })
 })
