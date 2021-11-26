@@ -48,13 +48,13 @@ const createProductForm = (allCategories, allDesigners, allTags) => {   // to ad
                 label: ['form-label']
             }
         }),
-        'price':fields.string({
+        'sellingPrice':fields.string({
             'required': true,
             'errorAfterField': true,
             'cssClasses': {
                 'label': ['form-label']
             },
-            'validators': [ validators.integer(), validators.min(0)]
+            'validators': [ validators.integer(), validators.min(1)]
         }),
         'retailPrice':fields.string({
             'label': 'Retail Price',
@@ -63,16 +63,16 @@ const createProductForm = (allCategories, allDesigners, allTags) => {   // to ad
             'cssClasses': {
                 'label': ['form-label']
             },
-            'validators': [ validators.integer(), validators.min(0)]
+            'validators': [ validators.integer(), validators.min(1)]
         }),
-        'stockUnit':fields.string({
+        'quantity':fields.string({
             'label': 'Stock Unit',
             'required': true,
             'errorAfterField': true,
             'cssClasses': {
                 'label': ['form-label']
             },
-            'validators': [ validators.integer(), validators.min(0)]
+            'validators': [ validators.integer(), validators.min(1)]
         }),
         'insurance':fields.string({   // to be boolean (yes/no)
             required: true,
@@ -84,9 +84,14 @@ const createProductForm = (allCategories, allDesigners, allTags) => {   // to ad
         'authenticity':fields.string({  // to be boolean (yes/no)
             required: true,
             errorAfterField: true,
+            widget: widgets.select(),
             cssClasses: {
                 label: ['form-label']
-            }
+            },
+            choices: [
+                [1, "Yes"],
+                [0, "No"]
+            ]
         }),
         'tags': fields.string({ // by default will set to "just in", but able to have multi-select for other tag
             required: true,
@@ -107,16 +112,23 @@ const createProductForm = (allCategories, allDesigners, allTags) => {   // to ad
             'widget': widgets.select(),
             'choices': allCategories
         }),
-        // 'condition_id': fields.string({  // drop-down list, can only choose 1 choice frm the list
-        //     'label':'Condition',
-        //     'required': true,
-        //     'errorAfterField': true,
-        //     'cssClasses': {
-        //         'label':['form-label']
-        //     },
-        //     'widget': widgets.select(),
-        //     'choices': allConditions
-        // }),
+        'condition': fields.string({  // drop-down list, can only choose 1 choice frm the list
+            'label':'Condition',
+            'required': true,
+            'errorAfterField': true,
+            'cssClasses': {
+                'label':['form-label']
+            },
+            'widget': widgets.select(),
+            'choices': [
+                ['New, with tag', 'New, with tag'],
+                ['Never worn', 'Never worn'],
+                ['Pristine', 'Pristine'],
+                ['Good', 'Good'],
+                ['Fair', 'Fair'],
+                ['Vintage', 'Vintage']
+            ]
+        }),
         'condition_description': fields.string({  
             'label': 'Condition Description',
             'required': true,
