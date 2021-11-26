@@ -27,16 +27,19 @@ var bootstrapField = function (name, object) {
 };
 
 // createProductForm function and validator
-const createProductForm = () => {   // to add into argurment - allCateogries, allTags
+const createProductForm = (allCategories, allDesigners, allTags) => {   // to add into argurment - allCateogries, allTags
     // create a new form
     return forms.create({
         // <input type="text" name="name" class="form-label"/>
-        'designer':fields.string({
-            required: true,
-            errorAfterField: true,
-            cssClasses: {
-                label: ['form-label']
-            }
+        'designer_id': fields.string({  // drop-down list, can only choose 1 choice frm the list
+            'label':'Designer',
+            'required': true,
+            'errorAfterField': true,
+            'cssClasses': {
+                'label':['form-label']
+            },
+            'widget': widgets.select(),
+            'choices': allDesigners
         }),
         'name':fields.string({
             required: true,
@@ -85,25 +88,25 @@ const createProductForm = () => {   // to add into argurment - allCateogries, al
                 label: ['form-label']
             }
         }),
-        // 'tags': fields.string({ // by default will set to "just in", but able to have multi-select for other tag
-        //     required: true,
-        //     errorAfterField: true,
-        //     cssClasses:{
-        //         'label':['form-label']
-        //     },
-        //     widget: widgets.multipleSelect(),
-        //     choices: allTags
-        // }),
-        // 'category_id': fields.string({  // drop-down list, can only choose 1 choice frm the list
-        //     'label':'Product Category',
-        //     'required': true,
-        //     'errorAfterField': true,
-        //     'cssClasses': {
-        //         'label':['form-label']
-        //     },
-        //     'widget': widgets.select(),
-        //     'choices': allCateogries
-        // }),
+        'tags': fields.string({ // by default will set to "just in", but able to have multi-select for other tag
+            required: true,
+            errorAfterField: true,
+            cssClasses:{
+                'label':['form-label']
+            },
+            widget: widgets.multipleSelect(),
+            choices: allTags
+        }),
+        'category_id': fields.string({  // drop-down list, can only choose 1 choice frm the list
+            'label':'Product Category',
+            'required': true,
+            'errorAfterField': true,
+            'cssClasses': {
+                'label':['form-label']
+            },
+            'widget': widgets.select(),
+            'choices': allCategories
+        }),
         // 'condition_id': fields.string({  // drop-down list, can only choose 1 choice frm the list
         //     'label':'Condition',
         //     'required': true,

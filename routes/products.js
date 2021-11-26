@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const axios = require("axios");
 
 // const { getProductById, getAllCategories, getAllTags } = require("");
 
@@ -8,23 +9,27 @@ const {
     createProductForm,
     createSearchForm
 } = require('../forms');
+const productDataLayer = require("../dal/products");
 
-router.get('/', (req, res) => {
-    res.render('products/listing', {
-        productListing: true
+router.get('/', async (req, res) => {
+    await axios.get(`${apiUrl}/products`)
+    .then(products => {
+        res.render('products/listing', {
+            productListing: true,
+            products: products.data.data
+        })
     })
 })
 
 
 // route to add a new product to the database
-router.get('/add', (req, res) => {   // to remove -- replace with router.get('/add', async function (req, res) {}
+router.get('/add', async (req, res) => {   // to remove -- replace with router.get('/add', async function (req, res) {}
     // const allCategories = await getAllCategories();
     // const allTags = await getAllTags(); 
-    const allCategories = [
-        {"XX": "YY"}
-    ]
-    const allTags = [ '1', '2']
-    const productForm = createProductForm();   // to add in parameter - allCategories, allTags
+    const allCategories = await productDataLayer.getAllCategories();
+    const allDesigners = await productDataLayer.getAllDesigners();
+    const allTags = await productDataLayer.getAllTags();
+    const productForm = createProductForm(allCategories, allDesigners, allTags);   // to add in parameter - allCategories, allTags
     res.render('products/add', {
         addNewProductListing: true,
         'productForm': productForm.toHTML(bootstrapField)
