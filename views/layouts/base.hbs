@@ -62,6 +62,22 @@
                     
                 </div>
                 <div class="col-10">
+                    {{!-- flash messages for success/failure --}}
+                    {{#if success_messages }}
+                        {{#each success_messages}}
+                            <div class="alert alert-success">
+                                {{this}}
+                            </div>
+                        {{/each}}
+                    {{/if}}
+                    {{#if error_messages}}
+                        {{#each error_messages}}
+                            <div class="alert alert-danger">
+                                {{this}}
+                            </div>
+                        {{/each}}
+                    {{/if}}
+                    {{!-- contents --}}
                     {{#block "content"}}{{/block}}
                 </div>
             </div>
