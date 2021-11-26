@@ -48,6 +48,7 @@ router.post('/profile',(req,res)=>{
         'success': async(form) => {
             try{
 
+                // use refresh token to obtain a new access token
                 let headerRefreshToken = {
                     'Content-Type': 'application/json'
                 }
@@ -63,13 +64,12 @@ router.post('/profile',(req,res)=>{
                     res.redirect('/login')
                 }
 
+                // use access token to send request to backend api to perform profile update
                 let newProfileInfo = {
                     "firstname": form.data.firstname,
                     "lastname": form.data.lastname,
                     "email": form.data.email
                 }
-
-                const needRelogin = newProfileInfo.email === req.session.user.info.email ? false : true
 
                 let headerAuthToken = {
                     'Content-Type': 'application/json',
@@ -80,13 +80,22 @@ router.post('/profile',(req,res)=>{
                     headers: headerAuthToken
                 })
 
+                // check whether update is successful
                 if (updateAdminResult) {
+
+                    // profile update successful
+
                     req.flash('success_messages', "Profile updated successfully");
+
+                    // when email address is changed, there is a need to re-login because the subject attribute 
+                    // of the refresh token is tied to the user's email address
+                    const needRelogin = newProfileInfo.email === req.session.user.info.email ? false : true
 
                     if (needRelogin) {
                         res.redirect('/logout');
                     } else {
-                        // profile update successful
+                        // retrieve latest user info from backend api, and update the user's info in the session
+
                         await axios.get(`${apiUrl}/users/info`, { headers: headerAuthToken})
                         .then( (userInfoResult) => {
                             const userInfo = userInfoResult.data.data
@@ -117,7 +126,77 @@ router.get('/change-password',(req,res)=>{
     })
 })
 
-// route to process to update existing user admin details
-router.post('/:user_id/update', async function (req, res) {})
+router.post('/change-password', (req, res) => {
+    const changePasswordForm = createChangePasswordForm();
+    changePasswordForm.handle(req, {
+        'error': (form) => {
+            // console.log(form.data.currentPassword)
+            // changePasswordForm.fields.currentPassword.value = form.data.currentPassword
+            // form.fields.newPassword.value = form.data.newPassword
+            // form.fields.newPassword2.value = form.data.newPassword2
+            res.render('settings/change-password',{
+                changePassword: true, // to control the tab selection
+                changePasswordForm: form.toHTML(bootstrapField)
+            })
+        },
+        'success': async(form) => {
+            try{
+
+                // use refresh token to obtain a new access token
+                let headerRefreshToken = {
+                    'Content-Type': 'application/json'
+                }
+
+                let accessTokenResult = await axios.post(`${apiUrl}/users/refresh`, {
+                    "refresh_token": req.session.user.token
+                }, {
+                    headers: headerRefreshToken
+                })
+
+                if (!accessTokenResult) {
+                    req.flash('error_messages', 'Login session expired')
+                    res.redirect('/login')
+                }
+
+                // use access token to send request to backend api to perform profile update
+                let updatePasswordInfo = {
+                    "current_password": form.data.currentPassword,
+                    "new_password": form.data.newPassword
+                }
+
+                let headerAuthToken = {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${accessTokenResult.data.accessToken}`
+                }
+
+                let changePasswordResult = await axios.put(`${apiUrl}/users/change-password`, updatePasswordInfo, {
+                    headers: headerAuthToken
+                })
+
+                // check whether update is successful
+                if (changePasswordResult) {
+
+                    // password update successful
+                    req.session.user.passwordExpired = false
+                    req.flash('success_messages', "Password updated successfully");
+                    res.redirect('/settings/profile');
+                    
+                } else {
+                    req.flash('error_messages', "Change password failed due to unexpected error");
+                    res.render('settings/change-password',{
+                        changePassword: true, // to control the tab selection
+                        changePasswordForm: form.toHTML(bootstrapField)
+                    })
+                }
+            } catch(err) {
+                req.flash('error_messages', "Change password failed due to unexpected error");
+                res.render('settings/change-password',{
+                    changePassword: true, // to control the tab selection
+                    changePasswordForm: form.toHTML(bootstrapField)
+                })
+            }
+        }
+    });
+})
 
 module.exports = router; 

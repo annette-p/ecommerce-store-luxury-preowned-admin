@@ -51,7 +51,15 @@ router.post('/login', (req,res)=>{
                             "info": userInfo,
                             "token": tokens.refreshToken
                         }
-                        res.redirect('/')
+
+                        if (tokens.lastLogin) {
+                            res.redirect('/')
+                        } else {
+                            req.session.user.passwordExpired = true
+                            req.flash('success_messages', "Welcome! Please change your initial password :)");
+                            res.redirect('/settings/change-password');
+                        }
+                        
                     } else {
                         req.flash('error_messages', 'Unauthorized')
                         res.redirect('/login')

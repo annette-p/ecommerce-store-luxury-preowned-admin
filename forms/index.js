@@ -287,7 +287,11 @@ const createChangePasswordForm = () => {
             'cssClasses': {
                 'label': ['form-label']
             },
-            'widget': widgets.password()
+            'widget': widgets.password(),
+            'validators': [
+                validators.minlength(6), 
+                validators.alphanumeric()
+            ]
         }),
         'newPassword2': fields.string({
             'label': 'Re-enter New Password',
@@ -296,8 +300,11 @@ const createChangePasswordForm = () => {
             'cssClasses': {
                 'label': ['form-label']
             },
-            'widget': widgets.password()
+            'widget': widgets.password(),
+            'validators': [validators.matchField('newPassword', 'Does not match "New Password"')]
         })
+    }, {
+        validatePastFirstError: true
     })
 }
 
