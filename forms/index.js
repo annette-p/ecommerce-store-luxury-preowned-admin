@@ -41,14 +41,14 @@ const createProductForm = (allCategories, allDesigners, allInsurances, allTags) 
             'widget': widgets.select(),
             'choices': allDesigners
         }),
-        'name':fields.string({
+        'name': fields.string({
             'required': true,
             'errorAfterField': true,
             'cssClasses': {
                 'label': ['form-label']
             }
         }),
-        'sellingPrice':fields.string({
+        'selling_price': fields.string({
             'label': 'Selling Price (S$)',
             'required': true,
             'errorAfterField': true,
@@ -58,7 +58,7 @@ const createProductForm = (allCategories, allDesigners, allInsurances, allTags) 
             'widget': widgets.number(),
             'validators': [ validators.integer(), validators.min(1)]
         }),
-        'retailPrice':fields.string({
+        'retail_price': fields.string({
             'label': 'Retail Price (S$)',
             'required': true,
             'errorAfterField': true,
@@ -68,7 +68,7 @@ const createProductForm = (allCategories, allDesigners, allInsurances, allTags) 
             'widget': widgets.number(),
             'validators': [ validators.integer(), validators.min(1)]
         }),
-        'quantity':fields.string({
+        'quantity': fields.string({
             'label': 'Stock Unit',
             'required': true,
             'errorAfterField': true,
@@ -78,7 +78,7 @@ const createProductForm = (allCategories, allDesigners, allInsurances, allTags) 
             'widget': widgets.number(),
             'validators': [ validators.integer(), validators.min(1)]
         }),
-        'insurance':fields.string({   // to be boolean (yes/no)
+        'insurance': fields.string({   // to be boolean (yes/no)
             'required': true,
             'errorAfterField': true,
             'cssClasses': {
@@ -87,7 +87,7 @@ const createProductForm = (allCategories, allDesigners, allInsurances, allTags) 
             'widget': widgets.select(),
             'choices': allInsurances
         }),
-        'authenticity':fields.string({  // to be boolean (yes/no)
+        'authenticity': fields.string({  // to be boolean (yes/no)
             'label': 'Authentic',
             'required': true,
             'errorAfterField': true,
@@ -178,13 +178,51 @@ const createProductForm = (allCategories, allDesigners, allInsurances, allTags) 
         //         'label': ['form-label']
         //     }
         // }),
-        // 'image_url': fields.string({
-        //    'label': 'Image URL',
-        //     widget: widgets.hidden()
-        // })
+        'product_image_1': fields.string({
+           'label': 'Image URL',
+           'required': true,
+            widget: widgets.hidden()
+        }),
+        'product_image_2': fields.string({
+            'label': 'Image URL',
+            'required': true,
+            widget: widgets.hidden()
+        }),
+        'product_gallery_1': fields.string({
+            'label': 'Image URL',
+            'required': true,
+            widget: widgets.hidden()
+        }),
+         'product_gallery_2': fields.string({
+            'label': 'Image URL',
+            'required': true,
+            widget: widgets.hidden()
+        }),
+        'product_gallery_3': fields.string({
+            'label': 'Image URL',
+            widget: widgets.hidden()
+        }),
+        'product_gallery_4': fields.string({
+            'label': 'Image URL',
+            widget: widgets.hidden()
+        }),
+        'product_gallery_5': fields.string({
+            'label': 'Image URL',
+            widget: widgets.hidden()
+        }),
+        'product_gallery_6': fields.string({
+            'label': 'Image URL',
+            widget: widgets.hidden()
+        }),
+        'product_gallery_7': fields.string({
+            'label': 'Image URL',
+            widget: widgets.hidden()
+        }),
+        'product_gallery_8': fields.string({
+            'label': 'Image URL',
+            widget: widgets.hidden()
+        })
         
-    }, {
-        validatePastFirstError: true
     })
 }
 

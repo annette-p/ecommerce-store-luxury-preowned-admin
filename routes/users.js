@@ -26,7 +26,7 @@ router.get('/admins', async (req, res) => {
 
 // route to display all customer users
 router.get('/customers', async (req, res) => {
-    await axios.get(`${apiUrl}/users/admins`)
+    await axios.get(`${apiUrl}/users/customers`)
     .then( customers => {
         res.render('users/customers', {
             customerListing: true,

@@ -34,6 +34,13 @@ app.use(express.static("public"));
 wax.on(hbs.handlebars);
 wax.setLayoutPath("./views/layouts");
 
+hbs.registerHelper('times', function(n, block) {
+  var accum = '';
+  for(var i = 1; i <= n; ++i)
+      accum += block.fn(i);
+  return accum;
+});
+
 // enable forms
 app.use(
   express.urlencoded({
@@ -90,24 +97,25 @@ app.use(function(req, res, next) {
 
 // import in custom routes
 const homeRoutes = require('./routes/home');
-const productRoutes = require('./routes/products')
-const orderRoutes = require('./routes/orders')
 const cartRoutes = require('./routes/carts')
+const cloudinaryRoutes = require('./routes/cloudinary.js')
 const consignmentRoutes = require('./routes/consignments')
-const userRoutes = require('./routes/users')
+const orderRoutes = require('./routes/orders')
+const productRoutes = require('./routes/products')
 const settingRoutes = require('./routes/settings')
+const userRoutes = require('./routes/users')
 
 async function main() {
 
   app.use(express.static( "/public"));
   app.use('/', homeRoutes);
-  app.use('/products', productRoutes);
-  app.use('/orders', orderRoutes);
   app.use('/carts', cartRoutes);
+  app.use('/cloudinary', cloudinaryRoutes);
   app.use('/consignments', consignmentRoutes);
-  app.use('/users', userRoutes);
+  app.use('/orders', orderRoutes);
+  app.use('/products', productRoutes);
   app.use('/settings', settingRoutes);
-  
+  app.use('/users', userRoutes);
 }
 
 main();
