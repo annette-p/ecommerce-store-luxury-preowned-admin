@@ -27,7 +27,7 @@ var bootstrapField = function (name, object) {
 };
 
 // createProductForm function and validator
-const createProductForm = (allCategories, allDesigners, allTags) => {   // to add into argurment - allCateogries, allTags
+const createProductForm = (allCategories, allDesigners, allInsurances, allTags) => {   // to add into argurment - allCateogries, allTags
     // create a new form
     return forms.create({
         // <input type="text" name="name" class="form-label"/>
@@ -42,27 +42,30 @@ const createProductForm = (allCategories, allDesigners, allTags) => {   // to ad
             'choices': allDesigners
         }),
         'name':fields.string({
-            required: true,
-            errorAfterField: true,
-            cssClasses: {
-                label: ['form-label']
+            'required': true,
+            'errorAfterField': true,
+            'cssClasses': {
+                'label': ['form-label']
             }
         }),
         'sellingPrice':fields.string({
+            'label': 'Selling Price (S$)',
             'required': true,
             'errorAfterField': true,
             'cssClasses': {
                 'label': ['form-label']
             },
+            'widget': widgets.number(),
             'validators': [ validators.integer(), validators.min(1)]
         }),
         'retailPrice':fields.string({
-            'label': 'Retail Price',
+            'label': 'Retail Price (S$)',
             'required': true,
             'errorAfterField': true,
             'cssClasses': {
                 'label': ['form-label']
             },
+            'widget': widgets.number(),
             'validators': [ validators.integer(), validators.min(1)]
         }),
         'quantity':fields.string({
@@ -72,35 +75,39 @@ const createProductForm = (allCategories, allDesigners, allTags) => {   // to ad
             'cssClasses': {
                 'label': ['form-label']
             },
+            'widget': widgets.number(),
             'validators': [ validators.integer(), validators.min(1)]
         }),
         'insurance':fields.string({   // to be boolean (yes/no)
-            required: true,
-            errorAfterField: true,
-            cssClasses: {
-                label: ['form-label']
-            }
+            'required': true,
+            'errorAfterField': true,
+            'cssClasses': {
+                'label': ['form-label']
+            },
+            'widget': widgets.select(),
+            'choices': allInsurances
         }),
         'authenticity':fields.string({  // to be boolean (yes/no)
-            required: true,
-            errorAfterField: true,
-            widget: widgets.select(),
-            cssClasses: {
+            'label': 'Authentic',
+            'required': true,
+            'errorAfterField': true,
+            'widget': widgets.select(),
+            'cssClasses': {
                 label: ['form-label']
             },
-            choices: [
+            'choices': [
                 [1, "Yes"],
                 [0, "No"]
             ]
         }),
         'tags': fields.string({ // by default will set to "just in", but able to have multi-select for other tag
-            required: true,
-            errorAfterField: true,
-            cssClasses:{
+            'required': true,
+            'errorAfterField': true,
+            'cssClasses':{
                 'label':['form-label']
             },
-            widget: widgets.multipleSelect(),
-            choices: allTags
+            'widget': widgets.multipleSelect(),
+            'choices': allTags
         }),
         'category_id': fields.string({  // drop-down list, can only choose 1 choice frm the list
             'label':'Product Category',
@@ -135,7 +142,8 @@ const createProductForm = (allCategories, allDesigners, allTags) => {   // to ad
             'errorAfterField': true,
             'cssClasses':{
                 'label':['form-label']
-            }
+            },
+            'widget': widgets.textarea()
         }),
         'product_description': fields.string({  
             'label': 'Product Description',
@@ -143,7 +151,8 @@ const createProductForm = (allCategories, allDesigners, allTags) => {   // to ad
             'errorAfterField': true,
             'cssClasses':{
                 'label':['form-label']
-            }
+            },
+            'widget': widgets.textarea()
         }),
         'product_specification': fields.string({  
             'label': 'Product Specification',
@@ -151,28 +160,31 @@ const createProductForm = (allCategories, allDesigners, allTags) => {   // to ad
             'errorAfterField': true,
             'cssClasses':{
                 'label':['form-label']
-            }
+            },
+            'widget': widgets.textarea()
         }),
-        'consignment':fields.string({   // to be boolean (yes/no)
-            required: true,
-            errorAfterField: true,
-            cssClasses: {
-                label: ['form-label']
-            }
-        }),
-        'consignment_id':fields.string({   // How to auto-populated frm consignment table
-            'label': 'Consignment ID',
-            required: true,
-            errorAfterField: true,
-            cssClasses: {
-                label: ['form-label']
-            }
-        }),
+        // 'consignment':fields.string({   // to be boolean (yes/no)
+        //     'required': true,
+        //     'errorAfterField': true,
+        //     'cssClasses': {
+        //         'label': ['form-label']
+        //     }
+        // }),
+        // 'consignment_id':fields.string({   // How to auto-populated frm consignment table
+        //     'label': 'Consignment ID',
+        //     'required': true,
+        //     'errorAfterField': true,
+        //     'cssClasses': {
+        //         'label': ['form-label']
+        //     }
+        // }),
         // 'image_url': fields.string({
         //    'label': 'Image URL',
         //     widget: widgets.hidden()
         // })
         
+    }, {
+        validatePastFirstError: true
     })
 }
 

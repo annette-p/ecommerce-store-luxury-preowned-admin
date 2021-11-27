@@ -28,8 +28,9 @@ router.get('/add', async (req, res) => {   // to remove -- replace with router.g
     // const allTags = await getAllTags(); 
     const allCategories = await productDataLayer.getAllCategories();
     const allDesigners = await productDataLayer.getAllDesigners();
+    const allInsurances = await productDataLayer.getAllInsurances();
     const allTags = await productDataLayer.getAllTags();
-    const productForm = createProductForm(allCategories, allDesigners, allTags);   // to add in parameter - allCategories, allTags
+    const productForm = createProductForm(allCategories, allDesigners, allInsurances, allTags);   // to add in parameter - allCategories, allTags
     res.render('products/add', {
         addNewProductListing: true,
         'productForm': productForm.toHTML(bootstrapField)

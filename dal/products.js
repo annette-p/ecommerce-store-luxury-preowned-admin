@@ -32,6 +32,22 @@ async function getAllDesigners() {
     }
 }
 
+async function getAllInsurances() {
+    try {
+        const response = await axios.get(`${apiUrl}/insurances`)
+        let allInsurances = response.data.data.map( insurance => [ insurance.id, `${insurance.company_name} | ${insurance.policy_name}` ])
+        allInsurances.sort( function(insurance1, insurance2) {
+            let insuranceName1 = insurance1[1].toLowerCase();
+            let insuranceName2 = insurance2[1].toLowerCase();
+
+            return insuranceName1.localeCompare(insuranceName2);
+        })
+        return allInsurances;
+    } catch(err) {
+        throw err;
+    }
+}
+
 async function getAllTags() {
     try {
         const response = await axios.get(`${apiUrl}/tags`)
@@ -51,5 +67,6 @@ async function getAllTags() {
 module.exports = {
     getAllCategories,
     getAllDesigners,
+    getAllInsurances,
     getAllTags
 }
