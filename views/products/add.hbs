@@ -102,7 +102,8 @@
                 'apiKey': "{{cloudinaryApiKey}}",
                 'uploadPreset':"{{cloudinaryUploadPreset}}",
                 'uploadSignature': generateSignature,
-                'cropping': true
+                'cropping': true,
+                'folder': 'luxury_preowned/products'
             }, (error, result) => {
                 processUpload(error, result, imgComponent)
             });
