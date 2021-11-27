@@ -41,6 +41,15 @@ hbs.registerHelper('times', function(n, block) {
   return accum;
 });
 
+// Ref: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toLocaleString
+// Ref: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat/DateTimeFormat
+hbs.registerHelper('sgtime', function(d) {
+  return new Date(d).toLocaleString('en-SG', {
+    timeZone: 'Asia/Singapore',
+    hour12: true
+  }).replace(/\//g, "-");
+});
+
 // enable forms
 app.use(
   express.urlencoded({
