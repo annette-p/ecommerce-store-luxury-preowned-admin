@@ -27,7 +27,7 @@ var bootstrapField = function (name, object) {
 };
 
 // createProductForm function and validator
-const createProductForm = (allCategories, allDesigners, allInsurances, allTags) => {   // to add into argurment - allCateogries, allTags
+const createProductForm = (allCategories, allDesigners, allInsurances, allTags) => {
     // create a new form
     return forms.create({
         // <input type="text" name="name" class="form-label"/>
@@ -78,7 +78,7 @@ const createProductForm = (allCategories, allDesigners, allInsurances, allTags) 
             'widget': widgets.number(),
             'validators': [ validators.integer(), validators.min(1)]
         }),
-        'insurance': fields.string({   // to be boolean (yes/no)
+        'insurance_id': fields.string({   // to be boolean (yes/no)
             'required': true,
             'errorAfterField': true,
             'cssClasses': {
@@ -101,7 +101,6 @@ const createProductForm = (allCategories, allDesigners, allInsurances, allTags) 
             ]
         }),
         'tags': fields.string({ // by default will set to "just in", but able to have multi-select for other tag
-            'required': true,
             'errorAfterField': true,
             'cssClasses':{
                 'label':['form-label']
@@ -179,53 +178,53 @@ const createProductForm = (allCategories, allDesigners, allInsurances, allTags) 
         //     }
         // }),
         'product_image_1': fields.string({
-           'label': 'Image URL',
-           'required': true,
-            widget: widgets.hidden()
-        }),
-        'product_image_2': fields.string({
-            'label': 'Image URL',
+            'label': 'Product Image 1',
             'required': true,
-            widget: widgets.hidden()
-        }),
-        'product_gallery_1': fields.string({
-            'label': 'Image URL',
-            'required': true,
-            widget: widgets.hidden()
-        }),
-         'product_gallery_2': fields.string({
-            'label': 'Image URL',
-            'required': true,
-            widget: widgets.hidden()
-        }),
-        'product_gallery_3': fields.string({
-            'label': 'Image URL',
-            widget: widgets.hidden()
-        }),
-        'product_gallery_4': fields.string({
-            'label': 'Image URL',
-            widget: widgets.hidden()
-        }),
-        'product_gallery_5': fields.string({
-            'label': 'Image URL',
-            widget: widgets.hidden()
-        }),
-        'product_gallery_6': fields.string({
-            'label': 'Image URL',
-            widget: widgets.hidden()
-        }),
-        'product_gallery_7': fields.string({
-            'label': 'Image URL',
-            widget: widgets.hidden()
-        }),
-        'product_gallery_8': fields.string({
-            'label': 'Image URL',
-            widget: widgets.hidden()
-        })
-        
+             widget: widgets.hidden()
+         }),
+         'product_image_2': fields.string({
+             'label': 'Product Image 2',
+             'required': true,
+             widget: widgets.hidden()
+         }),
+         'product_gallery_1': fields.string({
+             'label': 'Product Gallery Image 1',
+             'required': true,
+             widget: widgets.hidden()
+         }),
+          'product_gallery_2': fields.string({
+             'label': 'Product Gallery Image 2',
+             'required': true,
+             widget: widgets.hidden()
+         }),
+         'product_gallery_3': fields.string({
+             'label': 'Product Gallery Image 3',
+             widget: widgets.hidden()
+         }),
+         'product_gallery_4': fields.string({
+             'label': 'Product Gallery Image 4',
+             widget: widgets.hidden()
+         }),
+         'product_gallery_5': fields.string({
+             'label': 'Product Gallery Image 5',
+             widget: widgets.hidden()
+         }),
+         'product_gallery_6': fields.string({
+             'label': 'Product Gallery Image 6',
+             widget: widgets.hidden()
+         }),
+         'product_gallery_7': fields.string({
+             'label': 'Product Gallery Image 7',
+             widget: widgets.hidden()
+         }),
+         'product_gallery_8': fields.string({
+             'label': 'Product Gallery Image 8',
+             widget: widgets.hidden()
+         })
+    }, {
+        validatePastFirstError: true
     })
 }
-
 
 const createNewAdminForm = ()=>{
     return forms.create({
@@ -371,4 +370,11 @@ const createChangePasswordForm = () => {
 }
 
 
-module.exports = { createProductForm, bootstrapField, createNewAdminForm, createAdminLoginForm, createChangePasswordForm, displayAdminProfileForm };
+module.exports = {
+    bootstrapField,
+    createProductForm,
+    createNewAdminForm,
+    createAdminLoginForm,
+    createChangePasswordForm,
+    displayAdminProfileForm
+};

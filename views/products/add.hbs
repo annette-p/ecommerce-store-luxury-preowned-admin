@@ -96,11 +96,13 @@
         ]
         imgComponents.forEach( imgComponent => {
             // create the widget
+            // ref: https://cloudinary.com/documentation/upload_widget
             let widget = cloudinary.createUploadWidget({
                 'cloudName': "{{cloudinaryName}}",
                 'apiKey': "{{cloudinaryApiKey}}",
                 'uploadPreset':"{{cloudinaryUploadPreset}}",
                 'uploadSignature': generateSignature,
+                'cropping': true
             }, (error, result) => {
                 processUpload(error, result, imgComponent)
             });

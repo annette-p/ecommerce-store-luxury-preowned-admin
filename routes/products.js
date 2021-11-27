@@ -1,4 +1,4 @@
-const express = require('express');
+routes/products.jsconst express = require('express');
 const router = express.Router();
 const axios = require("axios");
 
@@ -45,17 +45,18 @@ router.post('/add', async (req, res) => {
     const allInsurances = await productDataLayer.getAllInsurances();
     const allTags = await productDataLayer.getAllTags();
     const productForm = createProductForm(allCategories, allDesigners, allInsurances, allTags);
+
     productForm.handle(req, {
         'error': (form) => {
-            // res.render('products/add', {
-            //     form: true,
-            //     'productForm': productForm.toHTML(bootstrapField),
-            //     'cloudinaryName': process.env.CLOUDINARY_NAME,
-            //     'cloudinaryApiKey': process.env.CLOUDINARY_API_KEY,
-            //     'cloudinaryUploadPreset': process.env.CLOUDINARY_UPLOAD_PRESET
-            // })
+            res.render('products/add', {
+                addNewProductListing: true,
+                'productForm': form.toHTML(bootstrapField),
+                'cloudinaryName': process.env.CLOUDINARY_NAME,
+                'cloudinaryApiKey': process.env.CLOUDINARY_API_KEY,
+                'cloudinaryUploadPreset': process.env.CLOUDINARY_UPLOAD_PRESET
+            })
         },
-        'success:': async (form) => {
+        'success': async (form) => {
             try {
                 // use refresh token to obtain a new access token
                 let headerRefreshToken = {
@@ -105,7 +106,7 @@ router.post('/add', async (req, res) => {
                     'Authorization': `Bearer ${accessTokenResult.data.accessToken}`
                 }
 
-                let createProductResult = await axios.put(`${apiUrl}/products/create`, newProductInfo, {
+                let createProductResult = await axios.post(`${apiUrl}/products/create`, newProductInfo, {
                     headers: headerAuthToken
                 })
 
@@ -113,32 +114,28 @@ router.post('/add', async (req, res) => {
                 if (createProductResult) {
 
                     // product creation successful
-
                     req.flash('success_messages', "Product created successfully");
-
-                    // when email address is changed, there is a need to re-login because the subject attribute 
-                    // of the refresh token is tied to the user's email address
-                    const needRelogin = newProfileInfo.email === req.session.user.info.email ? false : true
-
-                    if (needRelogin) {
-                        res.redirect('/logout');
-                    } else {
-                        // retrieve latest user info from backend api, and update the user's info in the session
-
-                        await axios.get(`${apiUrl}/users/info`, { headers: headerAuthToken})
-                        .then( (userInfoResult) => {
-                            const userInfo = userInfoResult.data.data
-
-                            req.session.user.info = userInfo;
-                            
-                        })
-                        res.redirect('/settings/profile');
-                    }
+                    res.redirect('/products');
                     
+                } else {
+                    req.flash('error_messages', "Product creation failed due to unexpected error");
+                    res.render('products/add', {
+                        addNewProductListing: true,
+                        'productForm': form.toHTML(bootstrapField),
+                        'cloudinaryName': process.env.CLOUDINARY_NAME,
+                        'cloudinaryApiKey': process.env.CLOUDINARY_API_KEY,
+                        'cloudinaryUploadPreset': process.env.CLOUDINARY_UPLOAD_PRESET
+                    })
                 }
             } catch(err) {
                 req.flash('error_messages', "Product creation failed due to unexpected error");
-                // res.redirect('/settings/profile');
+                res.render('products/add', {
+                    addNewProductListing: true,
+                    'productForm': form.toHTML(bootstrapField),
+                    'cloudinaryName': process.env.CLOUDINARY_NAME,
+                    'cloudinaryApiKey': process.env.CLOUDINARY_API_KEY,
+                    'cloudinaryUploadPreset': process.env.CLOUDINARY_UPLOAD_PRESET
+                })
             }
         }
     })
