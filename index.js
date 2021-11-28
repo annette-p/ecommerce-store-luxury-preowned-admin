@@ -34,6 +34,7 @@ app.use(express.static("public"));
 wax.on(hbs.handlebars);
 wax.setLayoutPath("./views/layouts");
 
+// Ref: https://stackoverflow.com/a/11924998
 hbs.registerHelper('times', function(n, block) {
   var accum = '';
   for(var i = 1; i <= n; ++i)

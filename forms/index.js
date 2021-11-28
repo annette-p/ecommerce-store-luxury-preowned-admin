@@ -162,6 +162,19 @@ const createProductForm = (allCategories, allDesigners, allInsurances, allTags) 
             },
             'widget': widgets.textarea()
         }),
+        'active': fields.string({  // to be boolean (yes/no)
+            'label': 'Active',
+            'required': true,
+            'errorAfterField': true,
+            'widget': widgets.select(),
+            'cssClasses': {
+                label: ['form-label']
+            },
+            'choices': [
+                [1, "Yes"],
+                [0, "No"]
+            ]
+        }),
         // 'consignment':fields.string({   // to be boolean (yes/no)
         //     'required': true,
         //     'errorAfterField': true,
