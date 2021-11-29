@@ -37,6 +37,11 @@
                 <li class="nav-item" role="presentation">
                     <a type="button" {{#if addNewProductListing}}aria-selected="true"{{/if}} class="nav-link {{#if addNewProductListing}}active{{/if}}" href="/products/add"> + Add New</a>
                 </li>
+                {{#if editProduct }}
+                <li class="nav-item" role="presentation">
+                    <a type="button" aria-selected="true" class="nav-link active" href="/products/{{product.id}}/update"> Edit {{product.name}}</a>
+                </li>
+                {{/if}}
             </ul>
             {{!-- content --}}
             <div class="tab-content" id="myTabContent">

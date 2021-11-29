@@ -144,7 +144,7 @@ const createProductForm = (allCategories, allDesigners, allInsurances, allTags) 
             },
             'widget': widgets.textarea()
         }),
-        'product_description': fields.string({  
+        'description': fields.string({  
             'label': 'Product Description',
             'required': true,
             'errorAfterField': true,
@@ -153,7 +153,7 @@ const createProductForm = (allCategories, allDesigners, allInsurances, allTags) 
             },
             'widget': widgets.textarea()
         }),
-        'product_specification': fields.string({  
+        'specifications': fields.string({  
             'label': 'Product Specification',
             'required': true,
             'errorAfterField': true,

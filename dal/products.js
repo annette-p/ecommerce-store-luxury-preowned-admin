@@ -1,5 +1,28 @@
 const axios = require("axios");
 
+// Retrieve all products 
+async function getAllProducts() {
+    try {
+        const response = await axios.get(`${apiUrl}/products`);
+        let allProducts = response.data.data;
+        return allProducts;
+    } catch(err) {
+        throw err;
+    }
+}
+
+async function getProductById(productId) {
+    try {
+        const response = await axios.get(`${apiUrl}/products/${productId}`);
+        let product = response.data.data;
+        return product;
+    } catch(err) {
+        throw err;
+    }
+}
+
+// Retrieve all categories
+
 async function getAllCategories() {
     try {
         const response = await axios.get(`${apiUrl}/categories`)
@@ -68,5 +91,6 @@ module.exports = {
     getAllCategories,
     getAllDesigners,
     getAllInsurances,
+    getAllProducts, getProductById,
     getAllTags
 }

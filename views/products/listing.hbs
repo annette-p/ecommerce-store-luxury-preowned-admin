@@ -32,7 +32,7 @@
                         <td>{{sgtime this.updated_at}}</td>
                         <td>{{#if this.active}}Y{{else}}N{{/if}}</td>
                         <td>
-                            <button type="button" class="btn btn-outline-secondary">Edit</button>
+                            <a type="button" class="btn btn-outline-secondary" href="/products/{{this.id}}/update">Edit</a>
                             <button type="button" class="btn btn-outline-danger">Delete</button>
                         </td>
                     </tr>
