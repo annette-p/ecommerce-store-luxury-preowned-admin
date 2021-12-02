@@ -1,4 +1,4 @@
-{{#extends 'base'}}
+views/carts/listing.hbs{{#extends 'base'}}
 
     {{#block "content"}}
         <div class="row mt-4">
@@ -29,11 +29,18 @@
                             </thead>
                             {{!-- content --}}
                             <tbody>
+                                {{#each carts}}
                                 <tr>
                                     <th scope="row">1</th>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
+                                    <td>
+                                        {{#if this.user.firstname}}
+                                            {{this.user.firstname}} {{this.user.lastname}}
+                                        {{else}}
+                                            Anonymous
+                                        {{/if}}
+                                    </td>
+                                    <td>S${{this.totalAmount}}</td>
+                                    <td>{{sgtime this.updated_at}}</td>
                                     <td>Email</td>
                                     <td>2</td>
                                     <td></td>
@@ -41,7 +48,8 @@
                                         <button type="button" class="btn btn-outline-secondary">Send Abandoned Email</button>
                                     </td>
                                 </tr>
-                                <tr>
+                                {{/each}}
+                                {{!-- <tr>
                                     <th scope="row">2</th>
                                     <td></td>
                                     <td></td>
@@ -64,7 +72,7 @@
                                     <td>
                                         <button type="button" class="btn btn-outline-secondary">Send Abandoned Email</button>
                                     </td>
-                                </tr>
+                                </tr> --}}
 
                             </tbody>
                         </table>
