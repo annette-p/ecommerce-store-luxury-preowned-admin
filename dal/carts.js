@@ -17,7 +17,7 @@ const getAllCarts = async (refreshToken) => {
     let accessToken = accessTokenResult.data.accessToken
 
     let cartsResult = await axios.get(
-        `${apiUrl}/carts/all`, 
+        `${apiUrl}/carts`, 
         { 'headers': {
                 'Authorization': `Bearer ${accessToken}`
             }
