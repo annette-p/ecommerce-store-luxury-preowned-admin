@@ -16,6 +16,13 @@ const getAllOrders = async (refreshToken) => {
     
 }
 
+const getListOfValidOrderStatuses = async () => {
+    let orderStatusesResult = await axios.get(`${apiUrl}/orders/status-list`);
+    let orderStatuses = orderStatusesResult.data.data;
+    return orderStatuses;
+}
+
 module.exports = {
-    getAllOrders
+    getAllOrders,
+    getListOfValidOrderStatuses
 }

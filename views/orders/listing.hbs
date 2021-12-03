@@ -31,37 +31,27 @@
                         <div class="col mb-2">
                         </div> 
                         <div class="col mb-2">
-                            All <span class="fst-italic">(23)</span>
+                            All <span class="fst-italic">({{length orders}})</span>
                         </div>
+                        {{#each orderSummary}}
                         <div class="col mb-2">
-                            Processing <span class="fst-italic">(23)</span> 
+                            {{@key}} <span class="fst-italic">({{this}})</span> 
                         </div>
+                        {{/each}}
                         <div class="col mb-2">
-                            Shipment <span class="fst-italic">(23)</span>
                         </div>
-                        <div class="col mb-2">
-                            Completed <span class="fst-italic">(23)</span>
-                        </div>
-                        <div class="col mb-2">
-                            Cancelled <span class="fst-italic">(5)</span>
-                        </div>
-                        <div class="col mb-2">
-                            Refund <span class="fst-italic">(2)</span>
-                        </div>
-                        <div class="col mb-2">
-                        </div> 
                     </div>
                     {{!-- Table --}}
                     <table class="mt-4 table table-hover">
                         {{!-- header --}}
                         <thead>
                             <tr>
-                                <th scope="col">Order#</th>
+                                <th scope="col">Order #</th>
                                 <th scope="col">Customer</th>
-                                <th scope="col">Date</th>
+                                <th scope="col">Last Update (SGT)</th>
                                 <th scope="col">Status</th>
                                 <th scope="col">Shipping Address</th>
-                                <th scope="col">Total</th>
+                                <th scope="col">Total (SGD)</th>
                                 <th scope="col">Quantity</th>
                                 <th scope="col">Payment</th>
                                 <th scope="col">Action</th>
@@ -76,7 +66,7 @@
                                 <td>{{sgtime this.updated_at}}</td>
                                 <td>{{this.status}}</td>
                                 <td><pre>{{this.orderShipment.0.shipping_address}}</pre></td>
-                                <td>{{this.payment_amount}}</td>
+                                <td>{{toFixed (divide this.payment_amount 100) 2}}</td>
                                 <td>{{length this.products}}</td>
                                 <td>{{this.payment_method}}</td>
                                 <td>

@@ -11,8 +11,15 @@ const orderDataLayer = require("../dal/orders");
 router.get('/', async (req, res) => {
     const refreshToken = req.session.user.token
     let orders = await orderDataLayer.getAllOrders(refreshToken);
+
+    let orderStatuses = await orderDataLayer.getListOfValidOrderStatuses();
+    let orderSummary = {}
+    orderStatuses.forEach( status => orderSummary[status] = 0 )
+    orders.forEach( order =>  orderSummary[order.status] += 1)
+
     res.render('orders/listing', {
-        orders: orders
+        orders: orders,
+        orderSummary: orderSummary
     })
 })
 
