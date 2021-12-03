@@ -12,7 +12,7 @@ const {
 const productDataLayer = require("../dal/products");
 
 router.get('/', async (req, res) => {
-    productDataLayer.getAllProducts()
+    await productDataLayer.getAllProducts()
     .then(products => {
         res.render('products/listing', {
             productListing: true,

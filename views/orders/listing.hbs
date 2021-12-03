@@ -69,45 +69,21 @@
                         </thead>
                         {{!-- content --}}
                         <tbody>
+                            {{#each orders}}
                             <tr>
-                                <th scope="row">1</th>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                                <th scope="row">{{this.id}}</th>
+                                <td>{{this.user.lastname}}, {{this.user.firstname}}</td>
+                                <td>{{sgtime this.updated_at}}</td>
+                                <td>{{this.status}}</td>
+                                <td><pre>{{this.orderShipment.0.shipping_address}}</pre></td>
+                                <td>{{this.payment_amount}}</td>
+                                <td>{{length this.products}}</td>
+                                <td>{{this.payment_method}}</td>
                                 <td>
                                     <button type="button" class="btn btn-outline-success">View</button>
                                 </td>
                             </tr>
-                            <tr>
-                                <th scope="row">2</th>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td>
-                                    <button type="button" class="btn btn-outline-success">View</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th scope="row">3</th>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td>
-                                    <button type="button" class="btn btn-outline-success">View</button>
-                                </td>
-                            </tr>
+                            {{/each}}
 
                         </tbody>
                     </table>
