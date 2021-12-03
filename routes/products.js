@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const axios = require("axios");
 
-// const { getProductById, getAllCategories, getAllTags } = require("");
+const authServiceLayer = require("../services/authentication");
 
 const {
     bootstrapField,
@@ -59,17 +59,8 @@ router.post('/add', async (req, res) => {
         'success': async (form) => {
             try {
                 // use refresh token to obtain a new access token
-                let headerRefreshToken = {
-                    'Content-Type': 'application/json'
-                }
-
-                let accessTokenResult = await axios.post(`${apiUrl}/users/refresh`, {
-                    "refresh_token": req.session.user.token
-                }, {
-                    headers: headerRefreshToken
-                })
-
-                if (!accessTokenResult) {
+                let headers = await authServiceLayer.generateHttpAuthzJsonHeader(req.session.user.token);
+                if (headers === null) {
                     req.flash('error_messages', 'Login session expired')
                     res.redirect('/login')
                 }
@@ -101,14 +92,7 @@ router.post('/add', async (req, res) => {
                     "tags": form.data.tags
                 }
 
-                let headerAuthToken = {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${accessTokenResult.data.accessToken}`
-                }
-
-                let createProductResult = await axios.post(`${apiUrl}/products/create`, newProductInfo, {
-                    headers: headerAuthToken
-                })
+                let createProductResult = await axios.post(`${apiUrl}/products/create`, newProductInfo, headers)
 
                 // check whether create is successful
                 if (createProductResult) {
@@ -219,17 +203,8 @@ router.post('/:product_id/update', async (req, res) => {
             'success': async (form) => {
                 try {
                     // use refresh token to obtain a new access token
-                    let headerRefreshToken = {
-                        'Content-Type': 'application/json'
-                    }
-
-                    let accessTokenResult = await axios.post(`${apiUrl}/users/refresh`, {
-                        "refresh_token": req.session.user.token
-                    }, {
-                        headers: headerRefreshToken
-                    })
-
-                    if (!accessTokenResult) {
+                    let headers = await authServiceLayer.generateHttpAuthzJsonHeader(req.session.user.token);
+                    if (headers === null) {
                         req.flash('error_messages', 'Login session expired')
                         res.redirect('/login')
                     }
@@ -261,14 +236,7 @@ router.post('/:product_id/update', async (req, res) => {
                         "tags": form.data.tags
                     }
 
-                    let headerAuthToken = {
-                        'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${accessTokenResult.data.accessToken}`
-                    }
-
-                    let updateProductResult = await axios.put(`${apiUrl}/products/${productId}/update`, updatedProductInfo, {
-                        headers: headerAuthToken
-                    })
+                    let updateProductResult = await axios.put(`${apiUrl}/products/${productId}/update`, updatedProductInfo, headers)
 
                     // check whether create is successful
                     if (updateProductResult) {

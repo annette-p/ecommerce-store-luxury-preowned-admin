@@ -1,29 +1,18 @@
 const axios = require("axios");
+const authServiceLayer = require("../services/authentication");
 
 // get all carts
 const getAllCarts = async (refreshToken) => {
 
-    let accessTokenResult = await axios.post(
-        `${apiUrl}/users/refresh`, 
-        {
-            "refresh_token": refreshToken
-        }, 
-        {
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        }
-    )
-    let accessToken = accessTokenResult.data.accessToken
+    const headers = await authServiceLayer.generateHttpAuthzHeader(refreshToken);
 
-    let cartsResult = await axios.get(
-        `${apiUrl}/carts`, 
-        { 'headers': {
-                'Authorization': `Bearer ${accessToken}`
-            }
-        });
-    let allCarts = cartsResult.data.data;
-    return allCarts;
+    if (headers !== null) {
+        let cartsResult = await axios.get(`${apiUrl}/carts`, headers);
+        let allCarts = cartsResult.data.data;
+        return allCarts;
+    } else {
+        throw new Error("Unable to generate authorization header to perform the operation.")
+    }
     
 }
 

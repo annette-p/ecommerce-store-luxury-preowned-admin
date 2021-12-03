@@ -2,6 +2,8 @@ const express = require('express');
 const router = express.Router();
 const axios = require("axios");
 
+const authServiceLayer = require("../services/authentication");
+
 const { 
     bootstrapField,
     createNewAdminForm,
@@ -55,15 +57,8 @@ router.post('/admins/register', (req,res)=>{
         },
         'success': async(form) => {
 
-            let headerRefreshToken = {
-                'Content-Type': 'application/json'
-            }
-            let accessTokenResult = await axios.post(`${apiUrl}/users/refresh`, {
-                "refresh_token": req.session.user.token
-            }, {
-                headers: headerRefreshToken
-            })
-            if (!accessTokenResult) {
+            let headers = await authServiceLayer.generateHttpAuthzJsonHeader(req.session.user.token);
+            if (headers === null) {
                 req.flash('error_messages', 'Login session expired')
                 res.redirect('/login')
             }
@@ -77,14 +72,7 @@ router.post('/admins/register', (req,res)=>{
                 "password": form.data.password,
             }
 
-            let headerAuthToken = {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${accessTokenResult.data.accessToken}`
-            }
-
-            let newAdminResult = await axios.post(`${apiUrl}/users/create`, newAdminInfo, {
-                headers: headerAuthToken
-            })
+            let newAdminResult = await axios.post(`${apiUrl}/users/create`, newAdminInfo, headers)
 
             if (newAdminResult) {
                 req.flash('success_messages', "New admin has been signed up successfully");

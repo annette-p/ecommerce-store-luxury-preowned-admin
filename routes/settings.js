@@ -2,17 +2,13 @@ const express = require('express');
 const router = express.Router();
 const axios = require("axios");
 
-const { bootstrapField, createChangePasswordForm, displayAdminProfileForm } = require('../forms');
-// const crypto = require('crypto');
-// const session = require('express-session');
-// const { checkIfAuthenticated} = require('../middlewares');
+const authServiceLayer = require("../services/authentication");
 
-
-// const getHashedPassword = (password) => {
-//     const sha256 = crypto.createHash('sha256');
-//     const hash = sha256.update(password).digest('base64');
-//     return hash;
-// }
+const {
+    bootstrapField,
+    createChangePasswordForm,
+    displayAdminProfileForm
+} = require('../forms');
 
 // main route - rediect to profile
 router.get('/', (req, res) => {
@@ -48,18 +44,8 @@ router.post('/profile',(req,res)=>{
         'success': async(form) => {
             try{
 
-                // use refresh token to obtain a new access token
-                let headerRefreshToken = {
-                    'Content-Type': 'application/json'
-                }
-
-                let accessTokenResult = await axios.post(`${apiUrl}/users/refresh`, {
-                    "refresh_token": req.session.user.token
-                }, {
-                    headers: headerRefreshToken
-                })
-
-                if (!accessTokenResult) {
+                let headers = await authServiceLayer.generateHttpAuthzJsonHeader(req.session.user.token);
+                if (headers === null) {
                     req.flash('error_messages', 'Login session expired')
                     res.redirect('/login')
                 }
@@ -71,14 +57,7 @@ router.post('/profile',(req,res)=>{
                     "email": form.data.email
                 }
 
-                let headerAuthToken = {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${accessTokenResult.data.accessToken}`
-                }
-
-                let updateAdminResult = await axios.put(`${apiUrl}/users/update`, newProfileInfo, {
-                    headers: headerAuthToken
-                })
+                let updateAdminResult = await axios.put(`${apiUrl}/users/update`, newProfileInfo, headers);
 
                 // check whether update is successful
                 if (updateAdminResult) {
@@ -96,7 +75,7 @@ router.post('/profile',(req,res)=>{
                     } else {
                         // retrieve latest user info from backend api, and update the user's info in the session
 
-                        await axios.get(`${apiUrl}/users/info`, { headers: headerAuthToken})
+                        await axios.get(`${apiUrl}/users/info`, headers)
                         .then( (userInfoResult) => {
                             const userInfo = userInfoResult.data.data
 
@@ -130,10 +109,6 @@ router.post('/change-password', (req, res) => {
     const changePasswordForm = createChangePasswordForm();
     changePasswordForm.handle(req, {
         'error': (form) => {
-            // console.log(form.data.currentPassword)
-            // changePasswordForm.fields.currentPassword.value = form.data.currentPassword
-            // form.fields.newPassword.value = form.data.newPassword
-            // form.fields.newPassword2.value = form.data.newPassword2
             res.render('settings/change-password',{
                 changePassword: true, // to control the tab selection
                 changePasswordForm: form.toHTML(bootstrapField)
@@ -142,18 +117,9 @@ router.post('/change-password', (req, res) => {
         'success': async(form) => {
             try{
 
-                // use refresh token to obtain a new access token
-                let headerRefreshToken = {
-                    'Content-Type': 'application/json'
-                }
+                let headers = await authServiceLayer.generateHttpAuthzJsonHeader(req.session.user.token);
 
-                let accessTokenResult = await axios.post(`${apiUrl}/users/refresh`, {
-                    "refresh_token": req.session.user.token
-                }, {
-                    headers: headerRefreshToken
-                })
-
-                if (!accessTokenResult) {
+                if (headers === null) {
                     req.flash('error_messages', 'Login session expired')
                     res.redirect('/login')
                 }
@@ -164,36 +130,25 @@ router.post('/change-password', (req, res) => {
                     "new_password": form.data.newPassword
                 }
 
-                let headerAuthToken = {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${accessTokenResult.data.accessToken}`
-                }
-
-                let changePasswordResult = await axios.put(`${apiUrl}/users/change-password`, updatePasswordInfo, {
-                    headers: headerAuthToken
-                })
-
-                // check whether update is successful
-                if (changePasswordResult) {
-
+                await axios.put(`${apiUrl}/users/change-password`, updatePasswordInfo, headers)
+                .then(() => {
                     // password update successful
                     req.session.user.passwordExpired = false
                     req.flash('success_messages', "Password updated successfully");
                     res.redirect('/settings/profile');
-                    
-                } else {
-                    req.flash('error_messages', "Change password failed due to unexpected error");
-                    res.render('settings/change-password',{
-                        changePassword: true, // to control the tab selection
-                        changePasswordForm: form.toHTML(bootstrapField)
-                    })
-                }
+                }).catch(err => {
+                    if (err.response.status === 401) {
+                        req.flash('error_messages', "Current password is incorrect");
+                        res.redirect('/settings/change-password');
+                    } else {
+                        req.flash('error_messages', "Change password failed due to unexpected error");
+                        res.redirect('/settings/change-password');
+                    }
+                })
+
             } catch(err) {
                 req.flash('error_messages', "Change password failed due to unexpected error");
-                res.render('settings/change-password',{
-                    changePassword: true, // to control the tab selection
-                    changePasswordForm: form.toHTML(bootstrapField)
-                })
+                res.redirect('/settings/change-password');
             }
         }
     });
