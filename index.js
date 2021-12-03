@@ -2,6 +2,9 @@ const express = require("express");
 const cors = require('cors');
 const hbs = require("hbs");
 const wax = require("wax-on");
+const helpers = require('handlebars-helpers')({
+  handlebars: hbs.handlebars,
+});
 
 // for sessions and flash messages
 const session = require('express-session');
@@ -33,6 +36,8 @@ app.use(express.static("public"));
 // setup wax-on
 wax.on(hbs.handlebars);
 wax.setLayoutPath("./views/layouts");
+
+hbs.registerHelper("array")
 
 // Ref: https://stackoverflow.com/a/11924998
 hbs.registerHelper('times', function(n, block) {
