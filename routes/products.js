@@ -242,7 +242,7 @@ router.post('/:product_id/update', async (req, res) => {
                     if (updateProductResult) {
 
                         // product creation successful
-                        req.flash('success_messages', "Product updated successfully");
+                        req.flash('success_messages', `Product # ${productId} updated successfully`);
                         res.redirect('/products');
                         
                     } else {
