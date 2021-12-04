@@ -383,7 +383,9 @@ const createChangePasswordForm = () => {
 }
 
 // edit Order form
-const createOrderUpdateForm = () => {
+const createOrderUpdateForm = (allOrderStatuses, allShipmentProviders) => {
+    let orderStatuses = allOrderStatuses.map( status => [ status, status ]);
+    let shipmentProvider = allShipmentProviders.map( provider => [ provider, provider ] )
     return forms.create({
         'status': fields.string({
             'label': 'Order Status',
@@ -393,19 +395,16 @@ const createOrderUpdateForm = () => {
                 'label':['form-label']
             },
             'widget': widgets.select(),
-            'choices': [
-                ["New", "New"],
-                ["Processing", "Processing"],
-                ["Shipment", "Shipment"],
-                ["Completed", "Completed"]
-            ]
+            'choices': orderStatuses
         }),
         'shipment_provider': fields.string({  
             'label': 'Shipment Provider',
             'errorAfterField': true,
             'cssClasses': {
                 'label': ['form-label']
-            }
+            },
+            'widget': widgets.select(),
+            'choices': shipmentProvider
         }),
         'tracking_number': fields.string({  
             'label': 'Tracking Number',

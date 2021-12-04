@@ -16,13 +16,22 @@ const getAllOrders = async (refreshToken) => {
     
 }
 
+// get list of valid order statuses
 const getListOfValidOrderStatuses = async () => {
-    let orderStatusesResult = await axios.get(`${apiUrl}/orders/status-list`);
+    let orderStatusesResult = await axios.get(`${apiUrl}/orders/statuses`);
     let orderStatuses = orderStatusesResult.data.data;
     return orderStatuses;
 }
 
-async function getOrderById(orderId, refreshToken) {
+// get list of shipment providers
+const getListOfShipmentProviders = async () => {
+    let shipmentProvidersResult = await axios.get(`${apiUrl}/orders/shipment-providers`);
+    let shipmentProviders = shipmentProvidersResult.data.data;
+    return shipmentProviders;
+}
+
+// Retrieve an order by its id
+const getOrderById = async (orderId, refreshToken) => {
     try {
         const headers = await authServiceLayer.generateHttpAuthzHeader(refreshToken);
         if (headers !== null) {
@@ -38,8 +47,31 @@ async function getOrderById(orderId, refreshToken) {
     }
 }
 
+// Update an order
+const updateOrder = async (orderId, orderData, refreshToken) => {
+    try {
+        const headers = await authServiceLayer.generateHttpAuthzHeader(refreshToken);
+        if (headers !== null) {
+            let updatedOrderInfo = {
+                "status": orderData.status,
+                "comment": orderData.comment,
+                "shipment_provider": orderData.shipment_provider,
+                "tracking_number": orderData.tracking_number
+            }
+            const response = await axios.put(`${apiUrl}/orders/${orderId}/update`, updatedOrderInfo, headers);
+            return response.data;
+        } else {
+            throw new Error("Unable to generate authorization header to perform the operation.")
+        }
+    } catch(err) {
+        throw err;
+    }
+}
+
 module.exports = {
     getAllOrders,
     getOrderById,
-    getListOfValidOrderStatuses
+    getListOfValidOrderStatuses,
+    getListOfShipmentProviders,
+    updateOrder
 }
