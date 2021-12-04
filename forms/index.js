@@ -382,9 +382,55 @@ const createChangePasswordForm = () => {
     })
 }
 
+// edit Order form
+const createOrderUpdateForm = () => {
+    return forms.create({
+        'status': fields.string({
+            'label': 'Order Status',
+            'required': true,
+            'errorAfterField': true,
+            'cssClasses': {
+                'label':['form-label']
+            },
+            'widget': widgets.select(),
+            'choices': [
+                ["New", "New"],
+                ["Processing", "Processing"],
+                ["Shipment", "Shipment"],
+                ["Completed", "Completed"]
+            ]
+        }),
+        'shipment_provider': fields.string({  
+            'label': 'Shipment Provider',
+            'errorAfterField': true,
+            'cssClasses': {
+                'label': ['form-label']
+            }
+        }),
+        'tracking_number': fields.string({  
+            'label': 'Tracking Number',
+            'errorAfterField': true,
+            'cssClasses': {
+                'label': ['form-label']
+            }
+        }),
+        'comment': fields.string({  
+            'label': 'Comment',
+            'errorAfterField': true,
+            'cssClasses':{
+                'label':['form-label']
+            },
+            'widget': widgets.textarea()
+        }),
+    }, {
+        validatePastFirstError: true
+    })
+}
+
 
 module.exports = {
     bootstrapField,
+    createOrderUpdateForm,
     createProductForm,
     createNewAdminForm,
     createAdminLoginForm,

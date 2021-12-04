@@ -1,0 +1,98 @@
+{{#extends 'base'}}
+
+    {{#block "content"}}
+        <div class="row mt-4">
+            {{!-- search input --}}
+            <div class="row search-div">
+                <div class="col">
+                </div>
+                <div class="col">
+                    <div class="container-fluid">
+                        <form class="d-flex mb-3">
+                            <input class="form-control me-2" type="search" placeholder="Search for orders" aria-label="Search">
+                            <button class="btn btn-outline-success" type="submit">Search</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-1">
+                </div> 
+            </div>
+            {{!-- Nav tap --}}
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Orders</button>
+                </li>
+            </ul>
+            {{!-- content --}}
+            <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                    {{!-- Summary --}}  
+                    <div class="row mt-4 text-center">
+                        <div class="col mb-2">
+                        </div> 
+                        <div class="col mb-2">
+                            All <span class="fst-italic">({{length orders}})</span>
+                        </div>
+                        {{#each orderSummary}}
+                        <div class="col mb-2">
+                            {{@key}} <span class="fst-italic">({{this}})</span> 
+                        </div>
+                        {{/each}}
+                        <div class="col mb-2">
+                        </div>
+                    </div>
+                    {{!-- Table --}}
+                    <table class="mt-4 table table-hover">
+                        {{!-- header --}}
+                        <thead>
+                            <tr>
+                                <th scope="col">Order #</th>
+                                <th scope="col">Customer</th>
+                                <th scope="col">Last Update (SGT)</th>
+                                <th scope="col">Status</th>
+                                <th scope="col">Shipping Address</th>
+                                <th scope="col">Total (SGD)</th>
+                                <th scope="col">Quantity</th>
+                                <th scope="col">Payment</th>
+                                <th scope="col">Action</th>
+                            </tr>
+                        </thead>
+                        {{!-- content --}}
+                        <tbody>
+                            {{#each orders}}
+                            <tr>
+                                <th scope="row">{{this.id}}</th>
+                                <td>{{this.user.lastname}}, {{this.user.firstname}}</td>
+                                <td>{{sgtime this.updated_at}}</td>
+                                <td>{{this.status}}</td>
+                                <td><pre>{{this.orderShipment.0.shipping_address}}</pre></td>
+                                <td>{{toFixed (divide this.payment_amount 100) 2}}</td>
+                                <td>{{length this.products}}</td>
+                                <td>{{this.payment_method}}</td>
+                                <td>
+                                    <button type="button" class="btn btn-outline-success">View</button>
+                                </td>
+                            </tr>
+                            {{/each}}
+
+                        </tbody>
+                    </table>
+                    {{!-- Update button --}}
+                    <div class="row mt-3">
+                        <div class="col-1">
+                        </div> 
+                        <div class="col">
+                            <div class="d-grid gap-2 mt-3">
+                                <button class="btn btn-outline-secondary" type="submit">Update</button>
+                            </div>
+                        </div>
+                        <div class="col-1">
+                        </div> 
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    {{/block}}
+
+{{/extends}}

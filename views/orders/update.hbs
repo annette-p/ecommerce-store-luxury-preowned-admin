@@ -1,0 +1,29 @@
+{{#extends 'orders'}}
+    {{#block "orderContent"}}
+        <form method="POST">
+            <input type="hidden" name="_csrf" value="{{csrfToken}}"/>
+            <div class="row">
+                <div class="row mt-4">
+                    <h4>Update - Order #{{order.id}}</h4>
+                </div>
+                <div class="row mt-4">
+                    <div class="col col-4">
+                        <div class="card">
+                            <div class="card-body">
+                                {{{orderForm}}}
+                                <input type="submit" class="btn btn-secondary" type="button"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col col-8">
+                        <div class="card">
+                            <div class="card-body" style="width: 45rem;">
+                                TO DISPLAY ORDER DETAILS
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    {{/block}}
+{{/extends}}

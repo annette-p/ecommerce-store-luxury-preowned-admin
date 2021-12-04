@@ -22,7 +22,24 @@ const getListOfValidOrderStatuses = async () => {
     return orderStatuses;
 }
 
+async function getOrderById(orderId, refreshToken) {
+    try {
+        const headers = await authServiceLayer.generateHttpAuthzHeader(refreshToken);
+        if (headers !== null) {
+            const response = await axios.get(`${apiUrl}/orders/${orderId}`, headers);
+            let order = response.data.data;
+            return order;
+        } else {
+            throw new Error("Unable to generate authorization header to perform the operation.")
+        }
+        
+    } catch(err) {
+        throw err;
+    }
+}
+
 module.exports = {
     getAllOrders,
+    getOrderById,
     getListOfValidOrderStatuses
 }
