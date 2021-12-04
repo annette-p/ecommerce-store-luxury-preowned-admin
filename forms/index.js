@@ -257,12 +257,13 @@ const createNewAdminForm = ()=>{
                 'label': ['form-label']
             }
         }),
-        'email': fields.string({
+        'email': fields.email({
             'required': true,
             'errorAfterField': true,
             'cssClasses': {
                 'label': ['form-label']
-            }
+            },
+            'widget': widgets.email()
         }),
         'username': fields.string({
             'required': true,
