@@ -1,133 +1,65 @@
-{{#extends 'base'}}
+{{#extends 'consignments'}}
 
-    {{#block "content"}}
-        <div class="row mt-4">
-            {{!-- search input --}}
-            <div class="row search-div">
-                <div class="col">
-                </div>
-                <div class="col">
-                    <div class="container-fluid">
-                        <form class="d-flex mb-3">
-                            <input class="form-control me-2" type="search" placeholder="Search for orders" aria-label="Search">
-                            <button class="btn btn-outline-success" type="submit">Search</button>
-                        </form>
-                    </div>
-                </div>
-                <div class="col-1">
-                </div> 
+    {{#block "consignmentContent"}}
+        {{!-- Summary --}}  
+        <div class="row mt-4 text-center">
+            <div class="col mb-2">
+            </div> 
+            <div class="col mb-2">
+                All <span class="fst-italic">({{length consignments}})</span>
             </div>
-            {{!-- Nav tap --}}
-            <ul class="nav nav-tabs" id="myTab" role="tablist">
-                <li class="nav-item" role="presentation">
-                    <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Orders</button>
-                </li>
-            </ul>
-            {{!-- content --}}
-            <div class="tab-content" id="myTabContent">
-                <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                    {{!-- Summary --}}  
-                    <div class="row mt-4 text-center">
-                        <div class="col mb-2">
-                            All <span class="fst-italic">(23)</span>
-                        </div>
-                        <div class="col mb-2">
-                            First evaluation <span class="fst-italic">(23)</span> 
-                        </div>
-                        <div class="col mb-2">
-                            Official evaluation <span class="fst-italic">(23)</span>
-                        </div>
-                        <div class="col mb-2">
-                            Rejected <span class="fst-italic">(23)</span>
-                        </div>
-                        <div class="col mb-2">
-                            Cancelled <span class="fst-italic">(5)</span>
-                        </div>
-                        <div class="col mb-2">
-                            Refund <span class="fst-italic">(2)</span>
-                        </div>
-                    </div>
-                    {{!-- Table --}}
-                    <table class="mt-4 table table-hover">
-                        {{!-- header --}}
-                        <thead>
-                            <tr>
-                                <th scope="col">Order#</th>
-                                <th scope="col">Customer</th>
-                                <th scope="col">Date</th>
-                                <th scope="col">Product</th>
-                                <th scope="col">Categories</th>
-                                <th scope="col">Quantity</th>
-                                <th scope="col">Condition</th>
-                                <th scope="col">Status</th>
-                                <th scope="col">Shipping Address</th>
-                                <th scope="col">Action</th>
-                                {{!-- view more will see product description, condition comment, images --}}
-                            </tr>
-                        </thead>
-                        {{!-- content --}}
-                        <tbody>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td>official evaluation</td>
-                                <td></td>
-                                <td>
-                                    <button type="button" class="btn btn-outline-success">View</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th scope="row">2</th>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td>rejected</td>
-                                <td></td>
-                                <td>
-                                    <button type="button" class="btn btn-outline-success">View</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th scope="row">3</th>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td>accepted</td>
-                                <td></td>
-                                <td>
-                                    <button type="button" class="btn btn-outline-success">View</button>
-                                </td>
-                            </tr>
-
-                        </tbody>
-                    </table>
-                    {{!-- Update button --}}
-                    <div class="row mt-3">
-                        <div class="col-1">
-                        </div> 
-                        <div class="col">
-                            <div class="d-grid gap-2 mt-3">
-                                <button class="btn btn-outline-secondary" type="submit">Update</button>
-                            </div>
-                        </div>
-                        <div class="col-1">
-                        </div> 
-                    </div>
-                </div>
+            {{#each consignmentSummary}}
+            <div class="col mb-2">
+                {{@key}} <span class="fst-italic">({{this}})</span> 
+            </div>
+            {{/each}}
+            <div class="col mb-2">
             </div>
         </div>
-
+        {{!-- Table --}}
+        <table class="mt-4 table table-hover">
+            {{!-- header --}}
+            <thead>
+                <tr>
+                    <th scope="col">Consignment #</th>
+                    <th scope="col">Customer</th>
+                    <th scope="col">Last Update (SGT)</th>
+                    <th scope="col">Product</th>
+                    <th scope="col">Category</th>
+                    <th scope="col">Quantity</th>
+                    <th scope="col">Condition</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Shipping Address</th>
+                    <th scope="col">Action</th>
+                    {{!-- view more will see product description, condition comment, images --}}
+                </tr>
+            </thead>
+            {{!-- content --}}
+            <tbody>
+                {{#each consignments}}
+                <tr>
+                    <th scope="row">{{this.id}}</th>
+                    <td>{{this.user.lastname}}, {{this.user.firstname}}</td>
+                    <td>{{sgtime this.updated_at}}</td>
+                    <td>
+                        <div>{{#if this.product.product_gallery_1}}<img src="{{this.product.product_gallery_1}}" width="100" height="100" />{{/if}}</div>
+                        <div>{{this.product.name}}</div>
+                    </td>
+                    <td>{{this.product.category.name}}</td>
+                    <td>{{this.product.quantity}}</td>
+                    <td>
+                        <div>{{this.product.condition}}</div>
+                        <div>{{this.product.condition_description}}</div>
+                    </td>
+                    <td>{{this.status}}</td>
+                    <td>{{this.user.shipping_address}}</td>
+                    <td>
+                        <a type="button" class="btn btn-outline-success" href="/consignments/{{this.id}}/update">Edit</a>
+                    </td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
     {{/block}}
 
 {{/extends}}

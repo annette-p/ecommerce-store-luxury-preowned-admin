@@ -427,9 +427,36 @@ const createOrderUpdateForm = (allOrderStatuses, allShipmentProviders) => {
     })
 }
 
+// edit Consignment form
+const createConsignmentUpdateForm = (allConsignmentStatuses) => {
+    let consignmentStatuses = allConsignmentStatuses.map( status => [ status, status ]);
+    return forms.create({
+        'status': fields.string({
+            'label': 'Consignment Status',
+            'required': true,
+            'errorAfterField': true,
+            'cssClasses': {
+                'label':['form-label']
+            },
+            'widget': widgets.select(),
+            'choices': consignmentStatuses
+        }),
+        'comment': fields.string({  
+            'label': 'Comment',
+            'errorAfterField': true,
+            'cssClasses':{
+                'label':['form-label']
+            },
+            'widget': widgets.textarea()
+        }),
+    }, {
+        validatePastFirstError: true
+    })
+}
 
 module.exports = {
     bootstrapField,
+    createConsignmentUpdateForm,
     createOrderUpdateForm,
     createProductForm,
     createNewAdminForm,

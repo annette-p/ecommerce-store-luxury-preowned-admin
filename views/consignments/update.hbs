@@ -1,0 +1,43 @@
+{{#extends 'consignments'}}
+    {{#block "consignmentContent"}}
+        <form method="POST">
+            <input type="hidden" name="_csrf" value="{{csrfToken}}"/>
+            <div class="row">
+                <div class="row mt-4">
+                    <h4>Update - Consignment #{{consignment.id}}</h4>
+                </div>
+                <div class="row mt-4">
+                    <div class="col col-4">
+                        <div class="card">
+                            <div class="card-body">
+                                {{{consignmentForm}}}
+                                <input type="submit" class="btn btn-secondary" type="button"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col col-8">
+                        <div class="card">
+                            <div class="card-body" style="width: 45rem;">
+                                <div>
+                                    <div><h5>Customer</h5></div>
+                                    <div><b>Name</b> {{consignment.user.lastname}}, {{consignment.user.firstname}}</div>
+                                    <div><b>Email</b> {{consignment.user.email}}</div>
+                                    <div><b>Shipping Address</b> {{consignment.user.shipping_address}}</div>
+                                    <div><hr/></div>
+                                    <div><h5>Product</h5></div>
+                                    <div><b>Name</b> {{consignment.product.name}}</div>
+                                    <div><b>Category</b> {{consignment.product.category.name}}</div>
+                                    <div><b>Designer</b> {{consignment.product.designer.name}}</div>
+                                    <div><b>Conditions</b> {{consignment.product.condition}}. {{consignment.product.condition_description}}</div>
+                                    <div><b>Specification</b> {{consignment.product.specifications}}</div>
+                                    <div><b>Preferred Seeling Price</b> {{consignment.product.selling_price}}</div>
+                                    <div><a type="button" href="/products/{{consignment.product.id}}/update">Edit Product</a></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    {{/block}}
+{{/extends}}

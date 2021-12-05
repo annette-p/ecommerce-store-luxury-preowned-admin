@@ -1,0 +1,41 @@
+{{#extends 'base'}}
+
+    {{#block "content"}}
+        <div class="row mt-4">
+            {{!-- search input --}}
+            <div class="row search-div">
+                <div class="col">
+                </div>
+                <div class="col">
+                    <div class="container-fluid">
+                        <form class="d-flex mb-3">
+                            <input class="form-control me-2" type="search" placeholder="Search for orders" aria-label="Search">
+                            <button class="btn btn-outline-success" type="submit">Search</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-1">
+                </div> 
+            </div>
+            {{!-- Nav tap --}}
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <a type="button" href="/consignments" {{#if listConsignments}}aria-selected="true"{{/if}} class="nav-link {{#if listConsignments}}active{{/if}}">Consignments</a>
+                </li>
+                {{#if editConsignments }}
+                <li class="nav-item" role="presentation">
+                    <a type="button" href="/consignments/{{consignment.id}}/update" {{#if editConsignments}}aria-selected="true"{{/if}} class="nav-link {{#if editConsignments}}active{{/if}}">Edit Consignments # {{consignment.id}}</a>
+                </li>
+                {{/if}}
+            </ul>
+            {{!-- content --}}
+            <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                    {{#block "consignmentContent"}}{{/block}}
+                </div>
+            </div>
+        </div>
+
+    {{/block}}
+
+{{/extends}}
