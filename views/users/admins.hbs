@@ -29,51 +29,16 @@
                         <td>{{this.firstname}}</td>
                         <td>{{this.lastname}}</td>
                         <td>
-                            <button type="button" class="btn btn-outline-secondary">Edit</button>
-                            <button type="button" class="btn btn-outline-danger">Delete</button>
+                            {{#if this.active}}
+                                <a type="button" class="btn btn-outline-danger" href="/users/{{this.id}}/deactivate">Deactivate</a>
+                            {{else}}
+                                <a type="button" class="btn btn-outline-secondary" href="/users/{{this.id}}/activate">Activate</a>
+                            {{/if}}
                         </td>
                     </tr>
                     {{/each}}
-                    {{!-- <tr>
-                        <th scope="row">2</th>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td>
-                            <button type="button" class="btn btn-outline-secondary">Edit</button>
-                            <button type="button" class="btn btn-outline-danger">Delete</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th scope="row">3</th>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td>
-                            <button type="button" class="btn btn-outline-secondary">Edit</button>
-                            <button type="button" class="btn btn-outline-danger">Delete</button>
-                        </td>
-                    </tr> --}}
                 </tbody>
             </table>
-            {{!-- Update button --}}
-            <div class="row mt-3">
-                <div class="col-1">
-                </div> 
-                <div class="col">
-                    <div class="d-grid gap-2 mt-3">
-                        <button class="btn btn-outline-secondary" type="submit">Update</button>
-                    </div>
-                </div>
-                <div class="col-1">
-                </div> 
-            </div>
         </div>
         
     {{/block}}

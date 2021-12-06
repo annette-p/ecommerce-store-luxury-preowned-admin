@@ -10,14 +10,14 @@ const {
     displayAdminProfileForm 
 } = require('../forms');
 
-// main route - rediect to admin listing
-router.get('/', (req, res) => {
-    res.redirect('/users/admins')
-})
-
 // route to display all admin users
 router.get('/admins', async (req, res) => {
-    await axios.get(`${apiUrl}/users/admins`)
+    let headers = await authServiceLayer.generateHttpAuthzHeader(req.session.user.token);
+    if (headers === null) {
+        req.flash('error_messages', 'Login session expired')
+        res.redirect('/login')
+    }
+    await axios.get(`${apiUrl}/users/admins`, headers)
     .then( admins => {
         res.render('users/admins', {
             adminListing: true,
@@ -28,7 +28,12 @@ router.get('/admins', async (req, res) => {
 
 // route to display all customer users
 router.get('/customers', async (req, res) => {
-    await axios.get(`${apiUrl}/users/customers`)
+    let headers = await authServiceLayer.generateHttpAuthzHeader(req.session.user.token);
+    if (headers === null) {
+        req.flash('error_messages', 'Login session expired')
+        res.redirect('/login')
+    }
+    await axios.get(`${apiUrl}/users/customers`, headers)
     .then( customers => {
         res.render('users/customers', {
             customerListing: true,
@@ -82,8 +87,57 @@ router.post('/admins/register', (req,res)=>{
     })
 })
 
+// route to process to activate existing user 
+router.get('/:user_id/activate', async function (req, res) {
+    const userId = req.params.user_id
+    try {
+        const headers = await authServiceLayer.generateHttpAuthzJsonHeader(req.session.user.token);
+        if (headers === null) {
+            req.flash('error_messages', 'Login session expired')
+            res.redirect('/login')
+        }
 
-// route to process to update existing user details
-router.post('/:user_id/update', async function (req, res) {})
+        const newUserInfo = {
+            "active": true
+        }
+
+        await axios.put(`${apiUrl}/users/${userId}/update`, newUserInfo, headers)
+        req.flash('success_messages', `User id ${userId} activated successfully`);
+        res.redirect('back');
+        
+    } catch(_err) {
+        req.flash('error_messages', `Unable to activate user id ${userId}`)
+        res.redirect('back');
+    }
+})
+
+// route to process to activate existing user 
+router.get('/:user_id/deactivate', async function (req, res) {
+    const userId = req.params.user_id
+    try {
+        const headers = await authServiceLayer.generateHttpAuthzJsonHeader(req.session.user.token);
+        if (headers === null) {
+            req.flash('error_messages', 'Login session expired')
+            res.redirect('/login')
+        }
+
+        const newUserInfo = {
+            "active": false
+        }
+
+        await axios.put(`${apiUrl}/users/${userId}/update`, newUserInfo, headers)
+        req.flash('success_messages', `User id ${userId} deactivated successfully`);
+        res.redirect('back');
+        
+    } catch(_err) {
+        req.flash('error_messages', `Unable to deactivate user id ${userId}`)
+        res.redirect('back');
+    }
+})
+
+// main route - rediect to admin listing
+router.get('/', (req, res) => {
+    res.redirect('/users/admins')
+})
 
 module.exports = router; 
