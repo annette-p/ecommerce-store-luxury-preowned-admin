@@ -13,8 +13,8 @@
                         <th scope="col">Price</th>
                         <th scope="col">Designer</th>
                         <th scope="col">Category</th>
-                        <th scope="col">Date</th>
-                        <th scope="col">Active</th>
+                        <th scope="col">Last Update (SGT)</th>
+                        <th scope="col">Consignment</th>
                         <th scope="col">Action</th>
                     </tr>
                 </thead>
@@ -26,14 +26,25 @@
                         <td>{{#if this.product_image_1}}<img src="{{this.product_image_1}}" width="100" height="100" />{{/if}}</td>
                         <td>{{this.name}}</td>
                         <td>{{this.quantity}}</td>
-                        <td>{{this.selling_price}}</td>
+                        <td>SGD{{toFixed this.selling_price 2}}</td>
                         <td>{{this.designer.name}}</td>
                         <td>{{this.category.name}}</td>
                         <td>{{sgtime this.updated_at}}</td>
-                        <td>{{#if this.active}}Y{{else}}N{{/if}}</td>
+                        <td>
+                            {{#if this.consignment.id}}
+                                <a href="/consignments/{{this.consignment.id}}/update">Consignment #{{this.consignment.id}}</a>
+                            {{else}}
+                                N/A
+                            {{/if}}
+                        </td>
                         <td>
                             <a type="button" class="btn btn-outline-secondary" href="/products/{{this.id}}/update">Edit</a>
-                            <button type="button" class="btn btn-outline-danger">Delete</button>
+                            
+                            {{#if this.active}}
+                                <a type="button" class="btn btn-outline-danger" href="/products/{{this.id}}/deactivate">Deactivate</a>
+                            {{else}}
+                                <a type="button" class="btn btn-outline-secondary" href="/products/{{this.id}}/activate">Activate</a>
+                            {{/if}}
                         </td>
                     </tr>
                     {{/each}}

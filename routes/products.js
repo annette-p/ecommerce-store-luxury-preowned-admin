@@ -276,4 +276,52 @@ router.post('/:product_id/update', async (req, res) => {
     
 })
 
+// route to process to activate existing product 
+router.get('/:product_id/activate', async function (req, res) {
+    const productId = req.params.product_id
+    try {
+        const headers = await authServiceLayer.generateHttpAuthzJsonHeader(req.session.user.token);
+        if (headers === null) {
+            req.flash('error_messages', 'Login session expired')
+            res.redirect('/login')
+        }
+
+        const newProductInfo = {
+            "active": true
+        }
+
+        await axios.put(`${apiUrl}/products/${productId}/update`, newProductInfo, headers)
+        req.flash('success_messages', `Product id ${productId} activated successfully`);
+        res.redirect('back');
+        
+    } catch(_err) {
+        req.flash('error_messages', `Unable to activate product id ${productId}`)
+        res.redirect('back');
+    }
+})
+
+// route to process to activate existing product 
+router.get('/:product_id/deactivate', async function (req, res) {
+    const productId = req.params.product_id
+    try {
+        const headers = await authServiceLayer.generateHttpAuthzJsonHeader(req.session.user.token);
+        if (headers === null) {
+            req.flash('error_messages', 'Login session expired')
+            res.redirect('/login')
+        }
+
+        const newProductInfo = {
+            "active": false
+        }
+
+        await axios.put(`${apiUrl}/products/${productId}/update`, newProductInfo, headers)
+        req.flash('success_messages', `Product id ${productId} deactivated successfully`);
+        res.redirect('back');
+        
+    } catch(_err) {
+        req.flash('error_messages', `Unable to deactivate product id ${productId}`)
+        res.redirect('back');
+    }
+})
+
 module.exports = router; 
