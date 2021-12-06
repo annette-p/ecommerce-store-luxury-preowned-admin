@@ -18,7 +18,39 @@
                     <div class="col col-8">
                         <div class="card">
                             <div class="card-body" style="width: 45rem;">
-                                TO DISPLAY ORDER DETAILS
+                                <div><h5>Customer</h5></div>
+                                <div><b>Name</b> {{order.user.lastname}}, {{order.user.firstname}}</div>
+                                <div><b>Email</b> {{order.user.email}}</div>
+                                <div><b>Shipping Address</b> {{order.user.shipping_address}}</div>
+                                <div><hr/></div>
+                                <div><h5>Products</h5></div>
+                                <div>
+                                    <table class="mt-4 table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                <td>Quantity</td>
+                                                <td>Unit Price</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        {{#each order.products}}
+                                            <tr>
+                                                <td>{{this.name}}</td>
+                                                <td>{{this._pivot_quantity}}</td>
+                                                <td>SGD {{toFixed this.selling_price 2}}</td>
+                                            </tr>
+                                        {{/each}}
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div><hr/></div>
+                                <div><h5>Payment Info</h5></div>
+                                <div><b>Payment Total</b> SGD {{toFixed (divide order.payment_amount 100) 2}}</div>
+                                <div><b>Payment Method</b> {{order.payment_method}}</div>
+                                <div>
+                                    <b>Payment Ref (Stripe)</b> <a href="https://dashboard.stripe.com/test/payments/{{order.payment_reference}}" target="_blank">{{order.payment_reference}}</a>
+                                </div>
                             </div>
                         </div>
                     </div>
