@@ -79,6 +79,7 @@ router.post('/add', async (req, res) => {
                     "condition_description": form.data.condition_description,
                     "quantity": form.data.quantity,
                     "authenticity": form.data.authenticity,
+                    "active": form.data.active,
                     "product_image_1": form.data.product_image_1,
                     "product_image_2": form.data.product_image_2,
                     "product_gallery_1": form.data.product_gallery_1,
@@ -112,6 +113,7 @@ router.post('/add', async (req, res) => {
                     })
                 }
             } catch(err) {
+                console.log("Product creation failed. ", err)
                 req.flash('error_messages', "Product creation failed due to unexpected error");
                 res.render('products/add', {
                     addNewProductListing: true,
@@ -257,6 +259,7 @@ router.post('/:product_id/update', async (req, res) => {
                         })
                     }
                 } catch(err) {
+                    console.log("Product update failed. ", err)
                     req.flash('error_messages', "Product update failed due to unexpected error");
                     res.render('products/update', {
                         'editProduct': true,
