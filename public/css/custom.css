@@ -129,3 +129,15 @@ a {
 .admin-regis-form {
     margin-left: 150px;
 }
+
+/* Service page */
+
+.service-card {
+    height: 150px;
+    margin-top: 120px;
+    margin-left: 100px;
+}
+
+.service-text {
+    margin-top: 40px;
+}
