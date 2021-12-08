@@ -11,29 +11,48 @@
                         <div class="card">
                             <div class="card-body">
                                 {{{orderForm}}}
-                                <input type="submit" class="btn btn-secondary" type="button"/>
+                                <div class="d-grid gap-2">
+                                    <input type="submit" class="btn btn-secondary mt-4" type="button"/>
+                                </div>
                             </div>
                         </div>
                     </div>
+                    {{!-- customer / products / payment info --}}
                     <div class="col col-8">
-                        <div class="card">
-                            <div class="card-body" style="width: 45rem;">
-                                <div><h5>Customer</h5></div>
-                                <div><b>Name</b> {{order.user.lastname}}, {{order.user.firstname}}</div>
-                                <div><b>Email</b> {{order.user.email}}</div>
-                                <div><b>Shipping Address</b> {{order.user.shipping_address}}</div>
-                                <div><hr/></div>
-                                <div><h5>Products</h5></div>
-                                <div>
-                                    <table class="mt-4 table table-hover">
-                                        <thead>
+                        <div class="row">
+                            <div class="card pt-3">
+                                <h4 class="text-center">Customer</h4>
+                                <table class="mt-2 table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col-4">Name</th>
+                                            <th scope="col-4">Email</th>
+                                            <th scope="col-4">Shipping Address</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
                                             <tr>
-                                                <td>Name</td>
-                                                <td>Quantity</td>
-                                                <td>Unit Price</td>
+                                                <td>{{order.user.lastname}}, {{order.user.firstname}}</td>
+                                                <td>{{order.user.email}}</td>
+                                                <td>{{order.orderShipment.0.shipping_address}}</td>
                                             </tr>
-                                        </thead>
-                                        <tbody>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="row mt-3">
+                            <div class="card pt-3">
+                                <h4 class="text-center">Products</h4>
+                                <table class="mt-2 table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col-4">Name</th>
+                                            <th scope="col-4">Quantity</th>
+                                            <th scope="col-4">Unit Price</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
                                         {{#each order.products}}
                                             <tr>
                                                 <td>{{this.name}}</td>
@@ -41,16 +60,30 @@
                                                 <td>SGD {{toFixed this.selling_price 2}}</td>
                                             </tr>
                                         {{/each}}
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <div><hr/></div>
-                                <div><h5>Payment Info</h5></div>
-                                <div><b>Payment Total</b> SGD {{toFixed (divide order.payment_amount 100) 2}}</div>
-                                <div><b>Payment Method</b> {{order.payment_method}}</div>
-                                <div>
-                                    <b>Payment Ref (Stripe)</b> <a href="https://dashboard.stripe.com/test/payments/{{order.payment_reference}}" target="_blank">{{order.payment_reference}}</a>
-                                </div>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="row mt-3">
+                            <div class="card pt-3">
+                                <h4 class="text-center">Payment Info</h4>
+                                <table class="mt-2 table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Payment Total</th>
+                                            <th scope="col">Payment Method</th>
+                                            <th scope="col">Payment Ref (Stripe)</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>SGD {{toFixed (divide order.payment_amount 100) 2}}</td>
+                                            <td>{{order.payment_method}}</td>
+                                            <td><a href="https://dashboard.stripe.com/test/payments/{{order.payment_reference}}" target="_blank">{{order.payment_reference}}</a></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
