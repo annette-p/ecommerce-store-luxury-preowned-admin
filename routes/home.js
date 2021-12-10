@@ -29,7 +29,7 @@ router.get('/', async (req,res)=>{
 
     orders.forEach( order => {
         
-        if (["New", "Processing"].includes(order.status)) {
+        if (["New", "Paid", "Processing"].includes(order.status)) {
 
             // If order status is "New" or "Processing", classify as "Pending"
             orderSummary["Pending"] += 1
