@@ -3,8 +3,7 @@
     {{#block "consignmentContent"}}
         {{!-- Summary --}}  
         <div class="row mt-4 text-center">
-            <div class="col mb-2">
-            </div> 
+
             <div class="col mb-2">
                 All <span class="fst-italic">({{length consignments}})</span>
             </div>
@@ -13,17 +12,15 @@
                 {{@key}} <span class="fst-italic">({{this}})</span> 
             </div>
             {{/each}}
-            <div class="col mb-2">
-            </div>
         </div>
         {{!-- Table --}}
         <table class="mt-4 table table-hover">
             {{!-- header --}}
             <thead>
                 <tr>
-                    <th scope="col">Consignment #</th>
+                    <th scope="col">#ID</th>
                     <th scope="col">Customer</th>
-                    <th scope="col">Last Update (SGT)</th>
+                    <th scope="col">Last Update</th>
                     <th scope="col">Product</th>
                     <th scope="col">Category</th>
                     <th scope="col">Quantity</th>
@@ -54,7 +51,7 @@
                     <td>{{this.status}}</td>
                     <td>{{this.user.shipping_address}}</td>
                     <td>
-                        <a type="button" class="btn btn-outline-success" href="/consignments/{{this.id}}/update">Edit</a>
+                        <a type="button" class="btn btn-outline-secondary mt-2" href="/consignments/{{this.id}}/update">Edit</a>
                     </td>
                 </tr>
                 {{/each}}
