@@ -85,7 +85,8 @@ router.get('/', async (req,res)=>{
         req.flash('error_messages', 'Login session expired')
         res.redirect('/login')
     }
-    let customers = await axios.get(`${apiUrl}/users/customers`, headers)
+    let customersResult = await axios.get(`${apiUrl}/users/customers`, headers);
+    let customers = customersResult.data.data.filter(c => c.active === 1);
 
     // Pass the prepared data to the hbs file for rendering
     res.render("home/index", {
