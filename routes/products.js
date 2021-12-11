@@ -6,18 +6,27 @@ const authServiceLayer = require("../services/authentication");
 
 const {
     bootstrapField,
-    createProductForm,
-    createSearchForm
+    createProductForm
 } = require('../forms');
 const productDataLayer = require("../dal/products");
 
 router.get('/', async (req, res) => {
-    await productDataLayer.getAllProducts()
+
+    // get the search critera from query string parameters in the route
+    // e.g. /orders?order_status=paid&search=prada
+    // ref: http://expressjs.com/en/api.html#req.query
+    const searchCriteria = req.query;
+
+    await productDataLayer.getAllProducts(searchCriteria)
     .then(products => {
         res.render('products/listing', {
             productListing: true,
             products: products
         })
+    }).catch(err => {
+        console.log("Product Listing page encountered error - ", err)
+        req.flash('error_messages', `An unexpected error has occurred`)
+        res.redirect('back');
     })
 })
 

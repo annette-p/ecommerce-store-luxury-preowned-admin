@@ -1,9 +1,11 @@
 const axios = require("axios");
 
 // Retrieve all products 
-async function getAllProducts() {
+async function getAllProducts(searchCriteria) {
     try {
-        const response = await axios.get(`${apiUrl}/products`);
+        // Perform a 'get' with search criteria in 'params'. The authorization header is not required here.
+        // ref: https://stackoverflow.com/a/48261824
+        const response = await axios.get(`${apiUrl}/products`, { params: searchCriteria});
         let allProducts = response.data.data;
         return allProducts;
     } catch(err) {
