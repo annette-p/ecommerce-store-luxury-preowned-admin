@@ -56,8 +56,22 @@ const generateHttpAuthzJsonHeader = async (refreshToken) => {
     }
 }
 
+const remoteLogout = async (refreshToken) => {
+    try {
+        let headers = await generateHttpAuthzJsonHeader(refreshToken);
+        const logoutInfo = {
+            refresh_token: refreshToken
+        }
+        await axios.post(`${apiUrl}/users/logout`, logoutInfo, headers);
+    } catch(err) {
+        console.log("service/authentication.js remoteLogout() - ERROR: ", err)
+    }
+    
+}
+
 module.exports = {
     getAccessToken,
     generateHttpAuthzHeader,
-    generateHttpAuthzJsonHeader
+    generateHttpAuthzJsonHeader,
+    remoteLogout
 }

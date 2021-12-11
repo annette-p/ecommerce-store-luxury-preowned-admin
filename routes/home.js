@@ -182,14 +182,25 @@ router.post('/login', (req,res)=>{
 })
 
 // router to process admin logout 
-router.get('/logout', (req,res)=>{
+router.get('/logout', async (req,res)=>{
     if (req.session.user) {
+
+        // get the jwt refresh token from request session
+        const refreshToken = req.session.user.token;
+
+        // perform a remote logout to blacklist the user's current refresh token
+        await authServiceLayer.remoteLogout(refreshToken);
+
+        // clear the user's information from the express session
         req.session.user = null;
+
+        // display a flash message on the successful log out.
         req.flash('success_messages', "Logged out successfully");
     }
     res.redirect('/login');
 });
 
+// router to new service, which is currently not implemented
 router.get('/new-service', (req,res)=>{
     res.render("home/new-service")
 })
