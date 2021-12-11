@@ -76,7 +76,7 @@ const createProductForm = (allCategories, allDesigners, allInsurances, allTags) 
                 'label': ['form-label']
             },
             'widget': widgets.number(),
-            'validators': [ validators.integer(), validators.min(1)]
+            'validators': [ validators.integer(), validators.min(0)]
         }),
         'insurance_id': fields.string({   // to be boolean (yes/no)
             'required': true,
@@ -175,21 +175,6 @@ const createProductForm = (allCategories, allDesigners, allInsurances, allTags) 
                 [0, "No"]
             ]
         }),
-        // 'consignment':fields.string({   // to be boolean (yes/no)
-        //     'required': true,
-        //     'errorAfterField': true,
-        //     'cssClasses': {
-        //         'label': ['form-label']
-        //     }
-        // }),
-        // 'consignment_id':fields.string({   // How to auto-populated frm consignment table
-        //     'label': 'Consignment ID',
-        //     'required': true,
-        //     'errorAfterField': true,
-        //     'cssClasses': {
-        //         'label': ['form-label']
-        //     }
-        // }),
         'product_image_1': fields.string({
             'label': 'Product Image 1',
             'required': true,
@@ -202,12 +187,10 @@ const createProductForm = (allCategories, allDesigners, allInsurances, allTags) 
          }),
          'product_gallery_1': fields.string({
              'label': 'Product Gallery Image 1',
-             'required': true,
              widget: widgets.hidden()
          }),
           'product_gallery_2': fields.string({
              'label': 'Product Gallery Image 2',
-             'required': true,
              widget: widgets.hidden()
          }),
          'product_gallery_3': fields.string({
