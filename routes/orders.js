@@ -14,11 +14,17 @@ const {
 
 // Route to display list of orders
 router.get('/', async (req, res) => {
+
+    // get the search critera from query string parameters in the route
+    // e.g. /orders?order_status=paid&search=prada
+    // ref: http://expressjs.com/en/api.html#req.query
+    const searchCriteria = req.query;
+
     // get the jwt refresh token from request session
     const refreshToken = req.session.user.token
 
     // call order DAL to retrieve all orders. 
-    let orders = await orderDataLayer.getAllOrders(refreshToken);
+    let orders = await orderDataLayer.getAllOrders(refreshToken, searchCriteria);
 
     // call order DAL to retrieve the list of valid order statuses
     let orderStatuses = await orderDataLayer.getListOfValidOrderStatuses();
@@ -32,7 +38,8 @@ router.get('/', async (req, res) => {
     res.render('orders/listing', {
         listOrders: true,
         orders: orders,
-        orderSummary: orderSummary
+        orderSummary: orderSummary,
+        searchCriteria: searchCriteria
     })
 })
 

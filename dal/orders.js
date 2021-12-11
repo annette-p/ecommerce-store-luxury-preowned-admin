@@ -2,12 +2,14 @@ const axios = require("axios");
 const authServiceLayer = require("../services/authentication");
 
 // get all orders
-const getAllOrders = async (refreshToken) => {
+const getAllOrders = async (refreshToken, searchCriteria) => {
 
     const headers = await authServiceLayer.generateHttpAuthzHeader(refreshToken);
 
     if (headers !== null) {
-        let ordersResult = await axios.get(`${apiUrl}/orders`, headers);
+        // perform a 'get' with authorization header and search criteria in 'params'
+        // ref: https://stackoverflow.com/a/48261824
+        let ordersResult = await axios.get(`${apiUrl}/orders`, { ...headers, params: searchCriteria});
         let allOrders = ordersResult.data.data;
         return allOrders;
     } else {
