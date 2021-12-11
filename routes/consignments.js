@@ -10,11 +10,17 @@ const {
 
 // Route to display list of consignments
 router.get('/', async (req, res) => {
+
+    // get the search critera from query string parameters in the route
+    // e.g. /consignments?order_status=paid&search=prada
+    // ref: http://expressjs.com/en/api.html#req.query
+    const searchCriteria = req.query;
+
     // get the jwt refresh token from request session
     const refreshToken = req.session.user.token
 
     // call order DAL to retrieve all consignments. 
-    let consignments = await consignmentDataLayer.getAllConsignments(refreshToken);
+    let consignments = await consignmentDataLayer.getAllConsignments(refreshToken, searchCriteria);
 
     // call order DAL to retrieve the list of valid consignment statuses
     let consignmentStatuses = await consignmentDataLayer.getListOfValidConsignmentStatuses();
@@ -27,7 +33,8 @@ router.get('/', async (req, res) => {
     res.render('consignments/listing', {
         listConsignments: true,
         consignmentSummary: consignmentSummary,
-        consignments: consignments
+        consignments: consignments,
+        searchCriteria: searchCriteria
     })
 })
 

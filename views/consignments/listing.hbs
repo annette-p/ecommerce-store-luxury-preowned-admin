@@ -5,11 +5,17 @@
         <div class="row mt-4 text-center">
 
             <div class="col mb-2">
-                All <span class="fst-italic">({{length consignments}})</span>
+                {{!-- ref: https://www.npmjs.com/package/handlebars-helpers#and --}}
+                <a href="/consignments{{#and searchCriteria searchCriteria.search}}?search={{searchCriteria.search}}{{/and}}">
+                    All <span class="fst-italic">({{length consignments}})</span>
+                </a>
             </div>
             {{#each consignmentSummary}}
             <div class="col mb-2">
-                {{@key}} <span class="fst-italic">({{this}})</span> 
+                {{!-- ref: https://stackoverflow.com/a/69718014 --}}
+                <a href="/consignments?consignment_status={{lowercase @key}}{{#and ../searchCriteria ../searchCriteria.search}}&search={{../searchCriteria.search}}{{/and}}">
+                {{@key}} <span class="fst-italic">({{this}})</span>
+                </a>
             </div>
             {{/each}}
         </div>

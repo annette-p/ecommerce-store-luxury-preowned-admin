@@ -2,12 +2,14 @@ const axios = require("axios");
 const authServiceLayer = require("../services/authentication");
 
 // get all consignments
-const getAllConsignments = async (refreshToken) => {
+const getAllConsignments = async (refreshToken, searchCriteria) => {
 
     const headers = await authServiceLayer.generateHttpAuthzHeader(refreshToken);
 
     if (headers !== null) {
-        let consignmentsResult = await axios.get(`${apiUrl}/consignments`, headers);
+        // perform a 'get' with authorization header and search criteria in 'params'
+        // ref: https://stackoverflow.com/a/48261824
+        let consignmentsResult = await axios.get(`${apiUrl}/consignments`, { ...headers, params: searchCriteria});
         let allConsignments = consignmentsResult.data.data;
         return allConsignments;
     } else {
