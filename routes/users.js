@@ -6,17 +6,21 @@ const authServiceLayer = require("../services/authentication");
 
 const { 
     bootstrapField,
-    createNewAdminForm,
-    displayAdminProfileForm 
+    createNewAdminForm
 } = require('../forms');
 
 // route to display all admin users
 router.get('/admins', async (req, res) => {
-    let headers = await authServiceLayer.generateHttpAuthzHeader(req.session.user.token);
+    // retrieve refresh token from session, and use it to request for a new access token in 
+    // the format of http authorization header
+    const refreshToken = req.session.user.token;
+    let headers = await authServiceLayer.generateHttpAuthzHeader(refreshToken);
     if (headers === null) {
         req.flash('error_messages', 'Login session expired')
         res.redirect('/login')
     }
+
+    // with the http authorization header, access api to get list of admins
     await axios.get(`${apiUrl}/users/admins`, headers)
     .then( admins => {
         res.render('users/admins', {
@@ -28,11 +32,16 @@ router.get('/admins', async (req, res) => {
 
 // route to display all customer users
 router.get('/customers', async (req, res) => {
-    let headers = await authServiceLayer.generateHttpAuthzHeader(req.session.user.token);
+    // retrieve refresh token from session, and use it to request for a new access token in 
+    // the format of http authorization header
+    const refreshToken = req.session.user.token;
+    let headers = await authServiceLayer.generateHttpAuthzHeader(refreshToken);
     if (headers === null) {
         req.flash('error_messages', 'Login session expired')
         res.redirect('/login')
     }
+
+    // with the http authorization header, access api to get list of customers
     await axios.get(`${apiUrl}/users/customers`, headers)
     .then( customers => {
         res.render('users/customers', {
@@ -77,12 +86,23 @@ router.post('/admins/register', (req,res)=>{
                 "password": form.data.password,
             }
 
-            let newAdminResult = await axios.post(`${apiUrl}/users/create`, newAdminInfo, headers)
+            try {
+                let newAdminResult = await axios.post(`${apiUrl}/users/create`, newAdminInfo, headers)
 
-            if (newAdminResult) {
-                req.flash('success_messages', "New admin has been signed up successfully");
-                res.redirect('/users/admins');
+                if (newAdminResult) {
+                    req.flash('success_messages', "New admin has been signed up successfully");
+                    res.redirect('/users/admins');
+                } else {
+                    req.flash('error_messages', 'Unable to signup new admin');
+                    res.redirect('back');
+                }
+            } catch(err) {
+                console.log(`Signup of new admin encountered error - `, err);
+                req.flash('error_messages', 'Unable to signup new admin due to unexpected errors');
+                res.redirect('back');
             }
+
+            
         }
     })
 })
@@ -105,7 +125,8 @@ router.get('/:user_id/activate', async function (req, res) {
         req.flash('success_messages', `User id ${userId} activated successfully`);
         res.redirect('back');
         
-    } catch(_err) {
+    } catch(err) {
+        console.log(`Activation of user id ${userId} encountered error - `, err);
         req.flash('error_messages', `Unable to activate user id ${userId}`)
         res.redirect('back');
     }
@@ -125,12 +146,13 @@ router.get('/:user_id/deactivate', async function (req, res) {
             "active": false
         }
 
-        await axios.put(`${apiUrl}/users/${userId}/update`, newUserInfo, headers)
+        await axios.put(`${apiUrl}/users/${userId}/update`, newUserInfo, headers);
         req.flash('success_messages', `User id ${userId} deactivated successfully`);
         res.redirect('back');
         
-    } catch(_err) {
-        req.flash('error_messages', `Unable to deactivate user id ${userId}`)
+    } catch(err) {
+        console.log(`Deactivation of user id ${userId} encountered error - `, err);
+        req.flash('error_messages', `Unable to deactivate user id ${userId}`);
         res.redirect('back');
     }
 })
