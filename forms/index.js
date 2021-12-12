@@ -246,14 +246,16 @@ const createNewAdminForm = ()=>{
             'cssClasses': {
                 'label': ['form-label']
             },
-            'widget': widgets.email()
+            'widget': widgets.email(),
+            'validators': [ validators.email()]
         }),
         'username': fields.string({
             'required': true,
             'errorAfterField': true,
             'cssClasses': {
                 'label': ['form-label']
-            }
+            },
+            'validators': [ validators.minlength(3)]
         }),
         'password': fields.string({
             'required': true,
@@ -261,7 +263,8 @@ const createNewAdminForm = ()=>{
             'cssClasses': {
                 'label': ['form-label']
             },
-            'widget': widgets.password()
+            'widget': widgets.password(),
+            'validators': [ validators.minlength(6)]
         }),
         'confirmPassword': fields.string({
             'label': 'Confirm Password',
@@ -273,6 +276,8 @@ const createNewAdminForm = ()=>{
             'widget': widgets.password(),
             'validators': [validators.matchField('password')]
         })
+    }, {
+        validatePastFirstError: true
     })
 }
 
@@ -298,7 +303,7 @@ const createAdminLoginForm = () => {
 }
 
 // current logged in admin user in setting page
-const displayAdminProfileForm = ()=>{    // to fatch current email from user profile table in db
+const displayAdminProfileForm = ()=>{
     return forms.create({
         'firstname': fields.string({
             'label': 'First Name',
@@ -321,7 +326,8 @@ const displayAdminProfileForm = ()=>{    // to fatch current email from user pro
             'errorAfterField': true,
             'cssClasses': {
                 'label': ['form-label']
-            }
+            },
+            'validators': [ validators.email()]
         })
     })
 }
@@ -347,8 +353,7 @@ const createChangePasswordForm = () => {
             },
             'widget': widgets.password(),
             'validators': [
-                validators.minlength(6), 
-                validators.alphanumeric()
+                validators.minlength(6)
             ]
         }),
         'newPassword2': fields.string({
