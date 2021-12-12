@@ -4,8 +4,8 @@
 
         {{!-- Summary --}}  
         <div class="row mt-4 text-center">
-            <div class="col mb-2">
-            </div> 
+            {{!-- <div class="col mb-2">
+            </div>  --}}
             <div class="col mb-2">
                 {{!-- ref: https://www.npmjs.com/package/handlebars-helpers#and --}}
                 <a href="/orders{{#and searchCriteria searchCriteria.search}}?search={{searchCriteria.search}}{{/and}}">
@@ -20,8 +20,8 @@
                 </a>
             </div>
             {{/each}}
-            <div class="col mb-2">
-            </div>
+            {{!-- <div class="col mb-2">
+            </div> --}}
         </div>
         {{!-- Table --}}
         <table class="mt-4 table table-hover">
@@ -59,18 +59,6 @@
 
             </tbody>
         </table>
-        {{!-- Update button
-        <div class="row mt-3">
-            <div class="col-1">
-            </div> 
-            <div class="col">
-                <div class="d-grid gap-2 mt-3">
-                    <button class="btn btn-outline-secondary" type="submit">Update</button>
-                </div>
-            </div>
-            <div class="col-1">
-            </div> 
-        </div> --}}
 
     {{/block}}
 
