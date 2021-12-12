@@ -32,7 +32,7 @@ Replace `<app-name>` with a name of your choice. Do not use underscore. As the a
   * Open a web browser and go to [Heroku Dashboard](https://dashboard.heroku.com/apps)
   * Click on the name of your app.
   * Under <b>Settings | Config Vars</b>, click <b>Reveal Config Vars</b>.
-  * Enter the list of environments variables required to be in `.env` file for local development - refer to [DEPLOYMENT.md](DEPLOYMENT.md).
+  * Enter the list of environments variables required to be in `.env` file for local development - refer to [DEVELOPMENT.md](DEVELOPMENT.md).
 
 ### Deploy Application to Heroku
 
