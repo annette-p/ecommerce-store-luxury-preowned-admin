@@ -39,14 +39,12 @@
                         </td>
                         <td>
                             <a type="button" class="btn btn-outline-secondary mt-1" href="/products/{{this.id}}/update">Edit</a>
-                            
+                            <a type="button" class="btn btn-outline-danger mt-1" href="/products/{{this.id}}/delete">Delete</a>
                             {{#if this.active}}
                                 <a type="button" class="btn btn-outline-danger mt-2" href="/products/{{this.id}}/deactivate">Deactivate</a>
                             {{else}}
                                 <a type="button" class="btn btn-outline-secondary mt-1" href="/products/{{this.id}}/activate">Activate</a>
                             {{/if}}
-
-                            <a type="button" class="btn btn-outline-danger mt-2" href="/products/{{this.id}}/delete">Delete</a>
                         </td>
                     </tr>
                     {{/each}}
