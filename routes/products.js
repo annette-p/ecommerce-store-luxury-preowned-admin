@@ -333,4 +333,24 @@ router.get('/:product_id/deactivate', async function (req, res) {
     }
 })
 
+// route to process to delete existing product 
+router.get('/:product_id/delete', async function (req, res) {
+    const productId = req.params.product_id
+    try {
+        const headers = await authServiceLayer.generateHttpAuthzJsonHeader(req.session.user.token);
+        if (headers === null) {
+            req.flash('error_messages', 'Login session expired')
+            res.redirect('/login')
+        }
+
+        await axios.delete(`${apiUrl}/products/${productId}/delete`, headers)
+        req.flash('success_messages', `Product id ${productId} deleted successfully`);
+        res.redirect('back');
+        
+    } catch(_err) {
+        req.flash('error_messages', `Unable to delete product id ${productId}`)
+        res.redirect('back');
+    }
+})
+
 module.exports = router; 
