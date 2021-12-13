@@ -41,6 +41,7 @@ Refer to [PDF file](docs/admin-portal-hbs-project3.pdf) for more details.
 ## Future Development
 
 * Implement "<b>add new</b>" consignment (to support the business flow after the staff evaluate the product during virtual appointment with customer)
+* Implement the automated pay-out to consignor after order has completed based on pay-out scheme.
 
 ## Deployment Instructions
 
