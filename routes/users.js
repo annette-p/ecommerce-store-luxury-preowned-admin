@@ -118,7 +118,7 @@ router.get('/:user_id/activate', async function (req, res) {
         }
 
         const newUserInfo = {
-            "active": true
+            "active": 1
         }
 
         await axios.put(`${apiUrl}/users/${userId}/update`, newUserInfo, headers)
@@ -143,7 +143,7 @@ router.get('/:user_id/deactivate', async function (req, res) {
         }
 
         const newUserInfo = {
-            "active": false
+            "active": 0
         }
 
         await axios.put(`${apiUrl}/users/${userId}/update`, newUserInfo, headers);

@@ -296,7 +296,7 @@ router.get('/:product_id/activate', async function (req, res) {
         }
 
         const newProductInfo = {
-            "active": true
+            "active": 1
         }
 
         await axios.put(`${apiUrl}/products/${productId}/update`, newProductInfo, headers)
@@ -320,7 +320,7 @@ router.get('/:product_id/deactivate', async function (req, res) {
         }
 
         const newProductInfo = {
-            "active": false
+            "active": 0
         }
 
         await axios.put(`${apiUrl}/products/${productId}/update`, newProductInfo, headers)
