@@ -244,7 +244,8 @@ router.post('/:product_id/update', async (req, res) => {
                         "product_gallery_6": form.data.product_gallery_6,
                         "product_gallery_7": form.data.product_gallery_7,
                         "product_gallery_8": form.data.product_gallery_8,
-                        "tags": form.data.tags
+                        "tags": form.data.tags,
+                        "active": form.data.active
                     }
 
                     let updateProductResult = await axios.put(`${apiUrl}/products/${productId}/update`, updatedProductInfo, headers)
